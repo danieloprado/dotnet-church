@@ -21,7 +21,7 @@ namespace ChurchWeb
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var tokenGenerator = context.HttpContext.ApplicationServices.GetService<ITokenGenerator>();
+            var tokenGenerator = context.HttpContext.RequestServices.GetService<ITokenGenerator>();
             var authToken = context.HttpContext.Request.Headers["Authorization"];
 
             try

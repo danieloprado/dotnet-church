@@ -13,6 +13,8 @@ namespace Services
         public UserService(ChurchDbContext context)
         {
             _context = context;
+            System.Console.Write("seed!");
+            context.Seed();
         }
 
         public async Task<User> GetForLogin(string email)

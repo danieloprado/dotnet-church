@@ -7,6 +7,14 @@ namespace ChurchWeb.Context
 {
     public class ChurchDbContext : DbContext
     {
+        protected ChurchDbContext()
+        {
+        }
+
+        public ChurchDbContext(DbContextOptions options) : base(options)
+        {
+        }
+
         public DbSet<Church> Churches { get; set; }
 
         public DbSet<User> Users { get; set; }
@@ -15,6 +23,7 @@ namespace ChurchWeb.Context
         {
             ChurchMap.Map(builder);
             ChurchUserMap.Map(builder);
+            InformativeMap.Map(builder);
             UserMap.Map(builder);
 
             base.OnModelCreating(builder);

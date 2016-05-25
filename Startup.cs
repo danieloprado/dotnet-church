@@ -1,8 +1,16 @@
+using ChurchWeb.Context;
+using ChurchWeb.Providers;
+using ChurchWeb.Providers.Interfaces;
+using ChurchWeb.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using Services;
+using Services.Interfaces;
 
 namespace ChurchWeb
 {
@@ -45,7 +53,24 @@ namespace ChurchWeb
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<ChurchDbContext>(options =>
+                {
+                    options.UseNpgsql(_configuration["Data:DefaultConnection:ConnectionString"]);
+                });
+
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+
+            services.Configure<Config.AppSettings>(options => _configuration.GetSection("Settings").Bind(options));
+            services.AddTransient<ITokenGenerator, TokenGenerator>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddScoped<UserToken>(UserTokenProvider.Resolve);
+
+            services.AddScoped<TokenAuthorize>();
         }
     }
 }

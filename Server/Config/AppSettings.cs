@@ -1,4 +1,6 @@
-﻿namespace ChurchWeb.Config
+﻿using Microsoft.Extensions.Configuration;
+
+namespace ChurchWeb.Config
 {
     public class AppSettings
     {

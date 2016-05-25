@@ -15,6 +15,18 @@ namespace ChurchWeb.Context.Mappings
               .IsRequired()
               .HasColumnType("varchar(100)");
 
+            entity.Property(e => e.Email)
+              .HasColumnType("varchar(150)");
+
+            entity.Property(e => e.Phone)
+              .HasColumnType("varchar(20)");
+
+            entity.Property(e => e.Address)
+              .HasColumnType("varchar(150)");
+
+            entity.Property(e => e.Latitude);
+            entity.Property(e => e.Longitude);
+
             entity.HasMany(e => e.Users)
               .WithOne(e => e.Church)
               .HasForeignKey(e=> e.UserId);
