@@ -1,16 +1,12 @@
-using ChurchWeb.Context;
-using ChurchWeb.Providers;
-using ChurchWeb.Providers.Interfaces;
-using ChurchWeb.ViewModels;
+using ChurchWeb.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using Services;
-using Services.Interfaces;
 
 namespace ChurchWeb
 {
@@ -53,11 +49,10 @@ namespace ChurchWeb
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<ChurchDbContext>(options =>
-                {
-                    options.UseNpgsql(_configuration["Data:DefaultConnection:ConnectionString"]);
-                });
+            services.AddEntityFrameworkNpgsql().AddDbContext<ChurchDbContext>(options =>
+            {
+                options.UseNpgsql(_configuration["Data:DefaultConnection:ConnectionString"]);
+            });
 
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -65,12 +60,11 @@ namespace ChurchWeb
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.Configure<Config.AppSettings>(options => _configuration.GetSection("Settings").Bind(options));
-            services.AddTransient<ITokenGenerator, TokenGenerator>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddScoped<UserToken>(UserTokenProvider.Resolve);
 
-            services.AddScoped<TokenAuthorize>();
+            ChurchWeb.Services.Config.DependencyInjection(services);
+            ChurchWeb.Data.Config.DependencyInjection(services);
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
+using ChurchWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using ChurchWeb.Context;
 
 namespace dotnet.Migrations
 {
