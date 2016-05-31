@@ -16,11 +16,32 @@ namespace ChurchWeb.Data.Repository
             _context = context;
         }
 
-         public async Task<List<Informative>> List(int churchId)
+        public async Task<Informative> Find(int id)
+        {
+            return await _context.Informatives.Where(x => x.Id == id).SingleOrDefaultAsync();
+        }
+
+        public async Task<List<Informative>> List(int churchId)
         {
             return await _context.Informatives
                 .Where(x=> x.ChurchId == churchId)
                 .ToListAsync();
+        }
+
+        public async Task<Informative> Create(Informative informative)
+        {
+            _context.Informatives.Add(informative);
+            await _context.SaveChangesAsync();
+
+            return informative;
+        }
+
+        public async Task<Informative> Update(Informative informative)
+        {
+            _context.Entry(informative).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return informative;
         }
     }
 }

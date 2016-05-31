@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using ChurchWeb.Domain.Services;
+using AutoMapper;
+using ChurchWeb.Domain.Models;
 
 namespace ChurchWeb.Services
 {
@@ -13,5 +15,13 @@ namespace ChurchWeb.Services
             services.AddScoped<IUserService, UserService>();
         }
 
+        public static void Mapper(IMapperConfiguration config)
+        {
+            config.CreateMap<Informative, Informative>()
+                .ForMember(m=> m.ChurchId, opt=> opt.Ignore())
+                .ForMember(m=> m.Church, opt=> opt.Ignore())
+                .ForMember(m=> m.CreatedDate, opt=> opt.Ignore())
+                .ForMember(m=> m.UpdatedDate, opt=> opt.Ignore());
+        }
     }
 }

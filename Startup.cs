@@ -1,3 +1,4 @@
+using AutoMapper;
 using ChurchWeb.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,9 +42,14 @@ namespace ChurchWeb
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("default", "api/{controller=Home}/{action=Index}/{id?}");
+                //routes.MapRoute("spa-fallback", "{*anything}", new FileRouteHandler());
+            });
+
+            app.Use(next => async context =>
+            {
+                context.Response.SendFileAsync(System.IO.Path.GetFullPath("~/wwwroot/index.html"));
+                return;
             });
         }
 
@@ -65,6 +71,11 @@ namespace ChurchWeb
 
             ChurchWeb.Services.Config.DependencyInjection(services);
             ChurchWeb.Data.Config.DependencyInjection(services);
+
+            Mapper.Initialize(config =>
+            {
+                ChurchWeb.Services.Config.Mapper(config);
+            });
         }
     }
 }

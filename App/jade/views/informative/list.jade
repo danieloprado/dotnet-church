@@ -19,7 +19,7 @@ md-card
 					td(md-cell) {{informative.title}}
 					td(md-cell) {{informative.date | date}}
 					td.text-right(md-cell)
-						md-button.md-icon-button(href="/informative/{{informative._id}}")
+						md-button.md-icon-button(href="/informative/{{informative.id}}")
 							md-icon edit
 						md-button.md-icon-button(ng-click="delete($event, informative, $index)")
 							md-icon delete

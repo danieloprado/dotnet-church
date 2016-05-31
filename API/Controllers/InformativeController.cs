@@ -3,19 +3,22 @@ using Microsoft.AspNetCore.Mvc;
 using ChurchWeb.Config;
 using ChurchWeb.Domain.Repositories;
 using ChurchWeb.Domain.Services;
+using ChurchWeb.Api.ViewModels;
+using ChurchWeb.Domain.Models;
 
 namespace ChurchWeb.Api.Controllers
 {
-    [Route("api/[controller]")]
     [TokenAuthorize]
     public class InformativeController : Controller
     {
-        private readonly IInformativeRepository _informativeRepository;
+        private readonly IInformativeRepository _repository;
+        private readonly IInformativeService _service;
         private readonly IAuthService _authService;
 
-        public InformativeController(IInformativeRepository informativRepository, IAuthService authService)
+        public InformativeController(IInformativeRepository repository, IInformativeService service, IAuthService authService)
         {
-            _informativeRepository = informativRepository;
+            _repository = repository;
+            _service = service;
             _authService = authService;
         }
 
@@ -23,8 +26,23 @@ namespace ChurchWeb.Api.Controllers
         public async Task<IActionResult> List()
         {
             var currentUser = _authService.GetCurrentUser();
-            var result = await _informativeRepository.List(currentUser.ChurchId);
+            var result = await _repository.List(currentUser.ChurchId);
             return Ok(result);
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> Save([FromBody]InformativeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = _authService.GetCurrentUser();
+            var informative = Informative.Create(user, model.Title, model.Date, model.Message);
+
+            informative = await _service.Save(informative);
+            return Ok(informative);
         }
 
     }

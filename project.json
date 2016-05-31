@@ -23,7 +23,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0-rc2-final",
     "BCrypt.Net-Core": "1.0.1",
-    "JwtDnx": "1.0.1"
+    "JwtDnx": "1.0.1",
+    "AutoMapper": "5.0.0-beta-1"
   },
   "frameworks": {
     "netcoreapp1.0": {

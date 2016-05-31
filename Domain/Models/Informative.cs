@@ -24,12 +24,12 @@ namespace ChurchWeb.Domain.Models
         public DateTime CreatedDate { get; protected set; }
         public DateTime UpdatedDate { get; set; }
 
-        public static Informative Create(int creatorId,int churchId, string title, DateTime date, string message)
+        public static Informative Create(UserToken user, string title, DateTime date, string message)
         {
             return new Informative()
             {
-                CreatorId = creatorId,
-                ChurchId = churchId,
+                CreatorId = user.Id,
+                ChurchId = user.ChurchId,
                 Title = title,
                 Date = date,
                 Message = message,
