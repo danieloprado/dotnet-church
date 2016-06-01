@@ -10,15 +10,18 @@ namespace ChurchWeb.Services
     public class InformativeService : IInformativeService
     {
         private readonly IInformativeRepository _repository;
+        private readonly IAuthService _authService;
 
-        public InformativeService(IInformativeRepository repository)
+        public InformativeService(IInformativeRepository repository, IAuthService authService)
         {
             _repository = repository;
+            _authService = authService;
         }
 
         public async Task<Informative> Save(Informative model)
         {
-            var informative = await _repository.Find(model.Id);
+            var user = _authService.GetCurrentUser();
+            var informative = await _repository.Find(model.Id, user.ChurchId);
 
             if (informative == null)
             {

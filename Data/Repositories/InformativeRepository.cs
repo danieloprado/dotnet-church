@@ -16,9 +16,11 @@ namespace ChurchWeb.Data.Repository
             _context = context;
         }
 
-        public async Task<Informative> Find(int id)
+        public async Task<Informative> Find(int id, int churchId)
         {
-            return await _context.Informatives.Where(x => x.Id == id).SingleOrDefaultAsync();
+            return await _context.Informatives
+                .Where(x => x.Id == id && x.ChurchId == churchId)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<List<Informative>> List(int churchId)
@@ -38,9 +40,7 @@ namespace ChurchWeb.Data.Repository
 
         public async Task<Informative> Update(Informative informative)
         {
-            _context.Entry(informative).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return informative;
         }
     }

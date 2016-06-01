@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using System.IO;
 
 namespace ChurchWeb
 {
@@ -17,8 +18,6 @@ namespace ChurchWeb
 
         public Startup(IHostingEnvironment env)
         {
-            System.Console.WriteLine(env.ContentRootPath);
-
             _configuration = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
                .AddJsonFile("appsettings.json", false, true)
@@ -42,16 +41,24 @@ namespace ChurchWeb
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute("default", "api/{controller=Home}/{action=Index}/{id?}");
-                //routes.MapRoute("spa-fallback", "{*anything}", new FileRouteHandler());
+                routes.MapRoute("default", "api/{controller=Resource}/{action=Index}/{id?}");
             });
 
-            app.Use(next => async context =>
+            app.MapWhen(config =>
             {
-                context.Response.SendFileAsync(System.IO.Path.GetFullPath("~/wwwroot/index.html"));
-                return;
+                return !config.Request.Path.Value.Contains(".") && !config.Request.Path.Value.Contains("/api");
+            }, branch =>
+            {
+                branch.Run(async context =>
+                {
+                    System.Console.WriteLine(context.Request.Path);
+
+                    var content = File.ReadAllText($"{env.ContentRootPath}/wwwroot/index.html");
+                    await context.Response.WriteAsync(content);
+                });
             });
         }
+
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -74,6 +81,7 @@ namespace ChurchWeb
 
             Mapper.Initialize(config =>
             {
+                ChurchWeb.Api.Config.Mapper(config);
                 ChurchWeb.Services.Config.Mapper(config);
             });
         }

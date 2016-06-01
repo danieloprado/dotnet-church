@@ -6,7 +6,7 @@ namespace ChurchWeb.Domain.Repositories
 {
     public interface IInformativeRepository
     {
-        Task<Informative> Find(int id);
+        Task<Informative> Find(int id, int churchId);
 
         Task<List<Informative>> List(int churchId);
 

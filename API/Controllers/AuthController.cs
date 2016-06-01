@@ -9,6 +9,7 @@ using ChurchWeb.Domain.Repositories;
 
 namespace ChurchWeb.Api.Controllers
 {
+    [Route("api/[controller]")]
     public class AuthController : Controller
     {
         private readonly ITokenService _tokenService;
