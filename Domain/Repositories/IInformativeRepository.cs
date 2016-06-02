@@ -13,5 +13,7 @@ namespace ChurchWeb.Domain.Repositories
         Task<Informative> Create(Informative informative);
 
         Task<Informative> Update(Informative informative);
+
+        Task Delete(Informative informative);
     }
 }

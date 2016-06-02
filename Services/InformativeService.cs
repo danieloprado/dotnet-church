@@ -1,6 +1,7 @@
 
 using System.Threading.Tasks;
 using AutoMapper;
+using ChurchWeb.CrossCutting.Exceptions;
 using ChurchWeb.Domain.Models;
 using ChurchWeb.Domain.Repositories;
 using ChurchWeb.Domain.Services;
@@ -32,5 +33,17 @@ namespace ChurchWeb.Services
             return await _repository.Update(model);
         }
 
+        public async Task Delete(int id)
+        {
+            var user = _authService.GetCurrentUser();
+            var informative = await _repository.Find(id, user.ChurchId);
+
+            if (informative == null)
+            {
+                throw new NotFoundException();
+            }
+
+            await _repository.Delete(informative);
+        }
     }
 }

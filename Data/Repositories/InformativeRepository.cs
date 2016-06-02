@@ -43,5 +43,11 @@ namespace ChurchWeb.Data.Repository
             await _context.SaveChangesAsync();
             return informative;
         }
+
+        public async Task Delete(Informative informative)
+        {
+            _context.Informatives.Remove(informative);
+            await _context.SaveChangesAsync();
+        }
     }
 }

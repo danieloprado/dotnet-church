@@ -6,6 +6,7 @@ using ChurchWeb.Domain.Services;
 using ChurchWeb.Api.ViewModels;
 using ChurchWeb.Domain.Models;
 using AutoMapper;
+using ChurchWeb.CrossCutting.Exceptions;
 
 namespace ChurchWeb.Api.Controllers
 {
@@ -54,6 +55,21 @@ namespace ChurchWeb.Api.Controllers
 
             informative = await _service.Save(informative);
             return Ok(informative);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _service.Delete(id);
+                return Ok();
+
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
     }
