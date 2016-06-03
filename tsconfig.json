@@ -9,5 +9,9 @@
     "removeComments": false,
     "noImplicitAny": false,
     "outDir": "wwwroot/app"
-  }
+  },
+  "exclude": [
+   "wwwroot",
+   "node_modules"
+  ]
 }

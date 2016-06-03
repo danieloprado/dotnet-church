@@ -1,3 +1,10 @@
 {
-  "server": { "baseDir": "./wwwroot" }
+  "files": ["./wwwroot/app/**/*", "./wwwroot/systemjs.config.js", "./wwwroot/**/*.{html}"],
+  "reloadDelay": 500,
+  "server": {
+    "baseDir": "./wwwroot",
+    "middleware": {
+      "0": null
+    }
+  }
 }

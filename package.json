@@ -2,11 +2,9 @@
   "name": "churchweb",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"dotnet watch\" \"npm run lite\" ",
+    "start": "concurrently \"dotnet watch\" \"npm run lite\" ",
     "lite": "lite-server",
     "postinstall": "typings install",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
     "typings": "typings"
   },
   "license": "ISC",
@@ -30,7 +28,11 @@
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-pug": "^3.0.3",
     "lite-server": "^2.2.0",
+    "rimraf": "^2.5.2",
     "typescript": "^1.8.10",
     "typings": "^1.0.4"
   }
