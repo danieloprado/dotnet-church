@@ -1,4 +1,5 @@
 wwwroot
+typings
 App/**/*.js
 App/**/*.map
 
