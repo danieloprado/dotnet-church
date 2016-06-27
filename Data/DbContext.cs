@@ -1,6 +1,6 @@
 using ChurchWeb.Data.Mappings;
 using ChurchWeb.Data.Seeds;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChurchWeb.Data

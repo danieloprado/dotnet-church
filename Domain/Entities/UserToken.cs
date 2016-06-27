@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Linq;
 
-namespace ChurchWeb.Domain.Models
+namespace ChurchWeb.Domain.Entities
 {
     public class UserToken
     {

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ChurchWeb.Domain.Services;
 using ChurchWeb.Api.ViewModels;
 using ChurchWeb.Config;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using ChurchWeb.Domain.Repositories;
 
 namespace ChurchWeb.Api.Controllers

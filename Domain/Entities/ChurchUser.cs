@@ -1,4 +1,4 @@
-namespace ChurchWeb.Domain.Models
+namespace ChurchWeb.Domain.Entities
 {
     public class ChurchUser
     {

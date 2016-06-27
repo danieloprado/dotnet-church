@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 
 namespace ChurchWeb.Domain.Repositories
 {

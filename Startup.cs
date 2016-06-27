@@ -39,6 +39,8 @@ namespace ChurchWeb
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            app.UseDirectoryBrowser();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "api/{controller=Resource}/{action=Index}/{id?}");

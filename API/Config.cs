@@ -1,6 +1,6 @@
 using AutoMapper;
 using ChurchWeb.Api.ViewModels;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 
 namespace ChurchWeb.Api
 {

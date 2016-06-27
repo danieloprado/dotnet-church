@@ -1,76 +1,131 @@
-const gulp = require("gulp");
-const concat = require("gulp-concat");
-const pug = require("gulp-pug");
-const exec = require('child_process').exec;
-const rimraf = require("rimraf");
+var gulp = require('gulp'),
+  $ = require('gulp-load-plugins')(),
+  rimraf = require('rimraf');
 
-const appFolder = "App";
-const distFolder = "wwwroot";
+var paths = {
+  js: [
+    'App/js/app/module.js', 'App/js/auth/module.js', 'App/js/**/*.js'
+  ],
+  sass: 'App/scss/app.scss',
+  jade: 'App/jade/**/*.jade',
 
-gulp.task('clean', cb => {
-  return rimraf(`${distFolder}/**/*`, cb);
-});
+  dist: 'wwwroot/',
+  imgs: 'App/imgs/**/*',
+  svgs: 'App/svgs/**/*',
 
-//INDEX
-gulp.task("views", _ => {
-  return gulp.src(`${appFolder}/**/*.pug`)
-    .pipe(pug())
-    .pipe(gulp.dest(`${distFolder}`));
-});
+  cssLibs: [
+    'bower_components/animate.css/animate.min.css',
+    'bower_components/angular-material/angular-material.min.css',
+    'bower_components/angular-material-data-table/dist/md-data-table.min.css',
+    'bower_components/angular-material-icons/angular-material-icons.css',
+    'bower_components/material-design-icons/iconfont/material-icons.css'
+  ],
 
-gulp.task("systemjs", _ => {
-  return gulp.src(`${appFolder}/systemjs.config.js`)
-    .pipe(gulp.dest(`${distFolder}`));
-});
+
+  jsLibs: [
+    'bower_components/jQuery/dist/jquery.min.js',
+    'bower_components/lodash/dist/lodash.min.js',
+
+    //angular
+    'bower_components/angular/angular.min.js',
+    'bower_components/angular-route/angular-route.min.js',
+    'bower_components/angular-animate/angular-animate.min.js',
+    'bower_components/angular-aria/angular-aria.min.js',
+    'bower_components/angular-i18n/angular-locale_pt-br.js',
+    'bower_components/angular-jwt/dist/angular-jwt.min.js',
+    'bower_components/angular-material/angular-material.min.js',
+    'bower_components/angular-material-data-table/dist/md-data-table.min.js',
+    'bower_components/angular-messages/angular-messages.min.js',
+    'bower_components/angular-jwt/dist/angular-jwt.min.js',
+    'bower_components/angular-material-icons/angular-material-icons.min.js',
+    'bower_components/angular-sanitize/angular-sanitize.min.js',
+    'bower_components/ngMask/dist/ngMask.min.js',
+
+    //Maps
+    'bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
+    'bower_components/angular-google-maps/dist/angular-google-maps.min.js',
+
+    //markdown
+    'bower_components/marked/marked.min.js',
+    'bower_components/angular-marked/dist/angular-marked.min.js',
+
+    //validator
+    'bower_components/md-form-validator/dist/md-form-validator.min.js'
+
+  ]
+};
+
+//CLEAN
+gulp.task('clean', cb => rimraf(paths.dist, cb));
 
 //LIBS
-gulp.task("libs-polyfills", _ => {
-  return gulp.src([
-    "node_modules/core-js/client/shim.min.js",
-    "node_modules/zone.js/dist/zone.js",
-    "node_modules/reflect-metadata/Reflect.js",
-    "node_modules/systemjs/dist/system.src.js",
-  ]).pipe(concat("polyfills.js"))
-    .pipe(gulp.dest(`${distFolder}/libs`));
+gulp.task('css:libs', () =>
+  gulp.src(paths.cssLibs)
+  .pipe($.concat('libs.min.css'))
+  .pipe(gulp.dest(paths.dist + 'css')));
+
+gulp.task("js:libs", () =>
+  gulp.src(paths.jsLibs)
+  .pipe($.concat("libs.min.js"))
+  .pipe(gulp.dest(paths.dist + "js")));
+
+gulp.task('imgs', () =>
+  gulp.src(paths.imgs)
+  .pipe(gulp.dest(paths.dist + 'imgs')));
+
+gulp.task('svgs', () =>
+  gulp.src(paths.svgs)
+  .pipe(gulp.dest(paths.dist + 'svgs')));
+
+gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs']);
+
+//SASS
+gulp.task("sass", () =>
+  gulp.src(paths.sass)
+  .pipe($.sourcemaps.init())
+  .pipe($.sass({
+    outputStyle: "compressed"
+  }).on('error', $.sass.logError))
+  .pipe($.autoprefixer({
+    browsers: ["last 2 versions", "ie >= 9"]
+  }))
+  .pipe($.sourcemaps.write())
+  .pipe(gulp.dest(paths.dist + 'css'))
+  .pipe($.livereload({
+    start: true
+  })));
+
+//JADE
+gulp.task('jade', () =>
+  gulp.src(paths.jade)
+  .pipe($.jade({
+    pretty: true
+  }))
+  .pipe(gulp.dest(paths.dist)));
+
+//JS
+gulp.task('js:hint', () =>
+  gulp.src(paths.js)
+  .pipe($.jshint())
+  .pipe($.jshint.reporter('default')));
+
+gulp.task('js', ['js:hint'], () =>
+  gulp.src(paths.js)
+  .pipe($.sourcemaps.init())
+  .pipe($.concat('all.min.js'))
+  .pipe($.babel({
+    presets: ['es2015']
+  }))
+  .pipe($.uglify())
+  .pipe($.sourcemaps.write())
+  .pipe(gulp.dest(paths.dist + 'js')));
+
+gulp.task('watch', function() {
+  $.livereload.listen();
+  gulp.watch('App/scss/**/*.scss', ['sass']);
+  gulp.watch(paths.jade, ['jade']);
+  gulp.watch(paths.js, ['js']);
 });
 
-gulp.task("libs", ["libs-polyfills"], cb => {
-  'use strict';
-  let processed = 0;
-  const libs = [
-    "node_modules/@angular/**/*.js",
-    "node_modules/angular2-in-memory-web-api/**/*.js",
-    "node_modules/rxjs/**/*.js"
-  ];
-
-  libs.forEach(path => {
-    const folderName = path.replace("node_modules/", "").replace("/**/*.js", "");
-    gulp.src(path)
-      .pipe(gulp.dest(`${distFolder}/libs/${folderName}`))
-      .on('end', _ => {
-        processed++;
-        if (processed == libs.length) cb();
-      });
-  });
-});
-
-//TS
-gulp.task("js", cb => {
-  exec("tsc", function (err, stdout, stderr) {
-    console.log(`tsc stdout: ${stdout}`);
-    console.log(`tsc stderr: ${stderr}`);
-    cb(err);
-  });
-});
-
-//DEFAULT
-gulp.task("watch", cb => {
-  gulp.watch(`${appFolder}/**/*.pug`, ['views']);
-  gulp.watch(`${appFolder}/systemjs.config.js`, ['systemjs']);
-
-  const tsc = exec("tsc -w");
-  tsc.stdout.on('data', data => console.log(`tsc stdout: ${data}`));
-  tsc.stderr.on('data', data => console.log(`tsc stderr: ${data}`));
-  tsc.on('exit', code => console.log(`tsc exited with code: ${code}`));
-});
-gulp.task("default", ["views", "systemjs", "libs", "watch"]);
+gulp.task('compile', ['libs', 'jade', 'sass', 'js']);
+gulp.task('default', ['compile', 'watch']);

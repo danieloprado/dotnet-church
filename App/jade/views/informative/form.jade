@@ -1,0 +1,37 @@
+icb-title(ng-if="!editing") Novo Informativo
+icb-title(ng-if="editing") Editar Informativo
+
+md-card
+	form(md-form-validator, ng-submit="submit()")
+		md-content(layout-padding)
+
+			div(layout="column",layout-gt-md="row")
+
+				div(flex)
+					div(layout="column",layout-gt-xs="row")
+						md-input-container.md-block
+							label Titulo
+							input(ng-model='model.title', name='title', required)
+							md-messages
+								md-message(required) Obrigatório
+
+						div(flex)
+							md-datepicker(ng-model="model.date", name="date", md-placeholder="Dia disponível", required)
+							md-messages(field="date")
+								md-message(valid) Data inválida
+								md-message(required) Obrigatório
+
+					md-input-container.md-block
+						label Mensagem
+						textarea(ng-model='model.message', name='message', required)
+						md-messages(field="message")
+							md-message(required) Obrigatório
+
+				div(flex)
+					label.md-title Preview
+					div(marked='getFullMarkdown()')
+
+		md-card-actions.padding(layout="row",layout-align="space-between center")
+			md-button.md-raised(href="/informative") Cancelar
+
+			md-button.md-raised.md-accent(type="submit") Salvar

@@ -1,0 +1,14 @@
+md-dialog(flex="30", flex-lg="40", flex-md="50", flex-sm="90", flex-xs="90")
+  md-dialog-content
+    div.md-inline-form(layout="column")
+    
+      form(ng-submit="infoForm.$valid && submit()", name="infoForm", novalidate)
+        md-toolbar
+          .md-toolbar-tools
+            h2 Selecione um Igreja
+            
+        md-content(layout-padding="")                
+          div(layout="row")
+            div(flex="", align="center", ng-repeat="church in churches")
+              md-button.md-raised(ng-click="select(church)")
+                | {{church.name}}

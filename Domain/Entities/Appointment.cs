@@ -1,11 +1,10 @@
 using System;
-using System.Collections.Generic;
 
-namespace ChurchWeb.Domain.Models
+namespace ChurchWeb.Domain.Entities
 {
-    public class Event
+    public class Appointment
     {
-        protected Event() { }
+        protected Appointment() { }
 
         //PK
         public int Id { get; set; }
@@ -13,12 +12,10 @@ namespace ChurchWeb.Domain.Models
         //FK
         public int ChurchId { get; protected set; }
         public Church Church { get; protected set; }
-        public List<Informative> Informatives { get; set; }
 
         //Props
         public string Title { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
     }

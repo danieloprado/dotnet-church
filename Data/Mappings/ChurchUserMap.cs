@@ -1,4 +1,4 @@
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChurchWeb.Data.Mappings

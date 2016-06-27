@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using ChurchWeb.CrossCutting.Exceptions;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using ChurchWeb.Domain.Repositories;
 using ChurchWeb.Domain.Services;
 

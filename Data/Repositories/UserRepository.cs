@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using ChurchWeb.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 

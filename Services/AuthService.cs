@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using System;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using ChurchWeb.Domain.Services;
 
 namespace ChurchWeb.Services

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using ChurchWeb.Domain.Services;
 using AutoMapper;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 
 namespace ChurchWeb.Services
 {

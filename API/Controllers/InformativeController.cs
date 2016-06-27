@@ -4,7 +4,7 @@ using ChurchWeb.Config;
 using ChurchWeb.Domain.Repositories;
 using ChurchWeb.Domain.Services;
 using ChurchWeb.Api.ViewModels;
-using ChurchWeb.Domain.Models;
+using ChurchWeb.Domain.Entities;
 using AutoMapper;
 using ChurchWeb.CrossCutting.Exceptions;
 
