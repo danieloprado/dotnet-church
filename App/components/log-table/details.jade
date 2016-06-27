@@ -1,0 +1,60 @@
+﻿md-dialog.log-table-component-details(flex="70", flex-sm="90", flex-xs="90")
+  md-toolbar(flex="noshrink")
+    .md-toolbar-tools
+      h2 Informações
+
+  md-dialog-content
+    
+    div.md-dialog-content.p-b-none
+      div(layout="column",layout-gt-xs="row")
+        div(flex="60")
+          md-input-container.md-block
+            label Responsável
+            input(ng-model='$ctrl.data.user.name', disabled)
+
+        div(flex="40")
+         md-input-container.md-block
+          label Data da alteração
+          input(value="{{$ctrl.data.date | date:'medium'}}", disabled)
+
+    md-list
+      md-list-item.md-2-line.md-long-text(ng-repeat="entity in $ctrl.data.entities", ng-switch="entity.action")
+        .md-list-item-text(ng-switch-when="added") 
+          h3 Adicionado {{ entity.display.name }}
+          table.list-details
+            tr(ng-repeat="(prop, value) in entity.display.data")
+              td {{prop}}
+              td
+                strong(ng-show="value.loading") carregando...
+                strong(ng-show="!value.loading") {{ value.value || value}}
+
+        .md-list-item-text(ng-switch-when="deleted") 
+          h3 Removido {{ entity.display.name }}
+          table.list-details
+            tr(ng-repeat="(prop, value) in entity.display.data")
+              td {{prop}}
+              td
+                strong(ng-show="value.loading") carregando...
+                strong(ng-show="!value.loading") {{ value.value || value}}
+        .md-list-item-text(ng-switch-when="modified") 
+          h3 Alterado {{ entity.display.name }}
+          table.list-details
+            tr
+              td
+              td Antigo
+              td Novo
+            tr(ng-repeat="change in entity.changes")
+              td {{change.display.name}}
+              td
+                strong(ng-show="change.display.oldValue.loading") carregando...
+                strong(ng-show="!change.display.oldValue.loading") {{ change.display.oldValue.value || change.display.oldValue}}
+              td
+                strong(ng-show="change.display.newValue.loading") carregando...
+                strong(ng-show="!change.display.newValue.loading") {{ change.display.newValue.value || change.display.newValue}}
+
+        md-divider.m-md(ng-show="!$last")
+
+
+  md-dialog-actions(layout="row")
+    div(flex)
+    md-button.md-raised.md-accent(ng-click="$ctrl.close()") Ok

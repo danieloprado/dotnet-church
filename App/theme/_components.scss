@@ -1,0 +1,366 @@
+md-content {
+    color: inherit;
+    background: $background-color;
+}
+
+
+md-switch {
+    margin: 0;
+    padding: 16px 0;
+}
+
+md-card {
+
+    md-card-content > md-divider {
+        margin: 18px -16px;
+    }
+
+    md-card-content > md-list {
+        margin: 0 -16px;
+    }
+
+    md-autocomplete md-autocomplete-wrap {
+        //box-shadow: 0 0px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12) !important;
+    }
+}
+
+md-divider.double {
+    border-top-width: 2px;
+}
+
+.md-button.md-fab.md-fab-bottom-right {
+    position: fixed;
+
+    @include media-max-breakpoints(xs) {
+        right: 5px;
+        bottom: 5px;
+    }
+}
+
+.md-chips {
+    margin-bottom: 25px;
+    padding: 0;
+    padding-top: 9px;
+
+    md-chip {
+        margin-bottom: 3px;
+        height: 29px;
+
+        ._md-chip-remove {
+            height: 29px;
+        }
+    }
+}
+
+md-chips.ng-invalid {
+    .md-chips {
+        box-shadow: 0 1px $danger !important;
+    }
+}
+
+md-chips + .error-message {
+    margin-top: -14px;
+    margin-bottom: 0;
+}
+
+ng-md-icon, md-icon {
+    color: inherit;
+
+    &:focus {
+        outline: none;
+    }
+
+    &[size='32'] {
+        width: 32px;
+        height: 32px;
+    }
+
+    svg {
+        vertical-align: middle;
+        fill: currentColor;
+        color: inherit;
+    }
+}
+
+.md-button:not(.md-fab) ng-md-icon + span,
+.md-button:not(.md-fab) md-icon + span {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.md-fab {
+    fill: $white;
+}
+
+md-input-container {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: 54px;
+
+    .md-errors-spacer {
+        color: rgba(0,0,0,0.5);
+        letter-spacing: .5px;
+    }
+
+    &[md-no-float] {
+        margin-top: 0;
+        min-height: 0;
+
+        .md-errors-spacer {
+            display: none;
+        }
+    }
+
+    > md-icon {
+        top: 3px;
+        left: 5px;
+    }
+    /*&.md-input-invalid {
+        padding-bottom: 0;
+    }*/
+}
+
+
+
+md-datepicker {
+    margin-top: 15px !important;
+    margin-bottom: 0;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    padding-bottom: 18px !important;
+    display: block;
+
+    md-icon {
+        color: $color;
+    }
+
+    .md-datepicker-input-container {
+        margin-left: 0;
+        width: calc(100% - 40px);
+    }
+
+    .md-datepicker-button {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .md-datepicker-triangle-button.md-button.md-icon-button {
+        right: 8px;
+    }
+}
+
+.ng-submitted {
+    md-select.ng-invalid ._md-select-value {
+        color: $danger;
+        border-color: $danger;
+    }
+
+
+    md-datepicker.ng-invalid {
+        .md-datepicker-input-container {
+            border-color: $danger;
+            border-width: 1px;
+        }
+
+        md-icon {
+            fill: rgba($danger, 0.8);
+        }
+
+        & + [ng-messages] {
+            padding-left: 40px;
+            color: $danger;
+            font-size: 12px;
+            margin-top: -18px;
+        }
+    }
+}
+
+.checkbox-label {
+    padding-left: 10px;
+
+    label {
+        font-size: 12px;
+        margin-bottom: 5px;
+        display: block;
+        margin-top: 10px;
+        opacity: 0.7;
+    }
+
+    md-checkbox {
+        margin-bottom: 4px;
+    }
+
+    [ng-messages] {
+        color: $danger;
+        font-size: 12px;
+        display: block !important;
+        max-height: 0;
+        transition: .5s;
+        overflow: hidden;
+
+        &:not(.ng-hide) {
+            max-height: 30px;
+        }
+    }
+}
+
+md-checkbox ._md-container ._md-icon {
+    transition: .5s;
+}
+
+md-checkbox.ng-invalid:not(.ng-untouched),
+.ng-submitted md-checkbox.ng-invalid {
+    ._md-container ._md-icon {
+        border-color: $danger;
+    }
+
+    ._md-label, label {
+        color: $danger;
+    }
+}
+
+
+.error-message {
+    color: $danger;
+    font-size: 12px;
+}
+
+
+md-select-menu {
+
+    .select-filter {
+        box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+        padding-left: 10.667px;
+        height: 48px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: auto;
+
+        input {
+            border: none;
+            outline: none;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    md-content._md {
+        max-height: 240px;
+    }
+
+    md-option small {
+        display: block;
+        opacity: .6;
+        margin-top: 2px;
+    }
+}
+
+md-datepicker,
+md-input-container {
+    + [ng-messages],
+    [ng-messages] {
+        min-height: 19px;
+    }
+}
+
+md-dialog {
+    max-height: calc(100vh - 50px) !important;
+
+    .md-dialog-title,
+    .md-dialog-title p {
+        margin-top: 0;
+    }
+
+    .md-title:empty {
+        display: none;
+    }
+
+    md-dialog-actions {
+        border-top: 1px solid $border-color;
+        padding: 10px 20px;
+    }
+
+    ._md-dialog-content-body > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+table.md-table {
+    td.md-cell {
+        vertical-align: top;
+        padding-top: 15px !important;
+        padding-bottom: 15px !important;
+        line-height: 18px;
+    }
+
+
+
+    &.striped {
+        tr:hover td {
+            background: rgba($accent, 0.08) !important;
+        }
+
+        tbody tr:nth-child(odd) td {
+            background: rgba(black, 0.03);
+        }
+    }
+
+    tfoot > tr:first-child > td {
+        border-top: 2px solid lighten(black, 80%);
+    }
+}
+
+app-loader > div {
+    position: absolute;
+    z-index: 10000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+    md-progress-circular {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        margin: auto !important;
+    }
+}
+
+md-table-container {
+
+    [md-row-select] tbody td {
+        cursor: pointer;
+    }
+
+    .md-column md-icon {
+        margin-left: 5px;
+    }
+
+
+    @include media-max-breakpoints(xs) {
+        table.md-table thead.md-head > tr.md-row {
+            height: 40px;
+        }
+
+        table.md-table:not(.md-row-select) td.md-cell:first-child,
+        table.md-table:not(.md-row-select) th.md-column:first-child {
+            padding: 0 10px;
+        }
+
+        table.md-table td.md-cell:last-child,
+        table.md-table th.md-column:last-child {
+            padding: 0 10px 0 0;
+        }
+
+        table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2),
+        table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+            padding: 0 10px 0 0;
+        }
+    }
+}

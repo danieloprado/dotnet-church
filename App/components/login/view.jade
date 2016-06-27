@@ -1,0 +1,24 @@
+﻿section.login-page
+  form(md-form-validator,ng-submit='$ctrl.submit()',name='loginForm', novalidate='')          
+
+    .content
+      .logo
+        img(src="/theme/imgs/logo.png")
+
+      md-card
+        md-card-content
+
+          md-input-container.md-block
+            label Email
+            input(ng-model='$ctrl.model.email', name='email', type='email', required, ng-disabled="$ctrl.lockUser")
+            md-messages
+
+          md-input-container.md-block
+            label Senha
+            input(ng-model='$ctrl.model.password', name='password', type='password', required)
+            md-messages
+
+      div(layout='row')
+        md-button.md-raised(type="button", ng-show="$ctrl.lockUser", ng-click="$ctrl.changeUser()") Trocar de usuário
+        span(flex='')
+        md-button.md-raised.md-accent(type='submit') Entrar

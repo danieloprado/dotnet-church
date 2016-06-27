@@ -1,0 +1,86 @@
+doctype
+html(lang='en', ng-app='icbApp')
+  head
+    meta(name='viewport', content='initial-scale=1')
+    meta(http-equiv='expires', content='0')
+    meta(charset='UTF-8')
+    title ICB
+
+    link(rel="icon", href="/favicon.ico?v=@NOW")
+    link(rel='stylesheet', href='/theme/libs.min.css?v=@NOW')
+    link(rel='stylesheet', href='/theme/app.css?v=@NOW')
+
+    style.
+      .ng-cloak{ display: none }
+
+  body.ng-cloak(layout='column')
+    app-loader
+    app-component-page
+
+    div(layout="row", flex)
+      md-sidenav.md-sidenav-left.md-whiteframe-4dp(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
+
+        header
+          div.logo
+            img(src="/theme/imgs/logo.png")
+
+          p {{user.name}}
+
+          md-menu(md-position-mode="target-right target")
+            md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
+              md-icon(md-svg-icon="dots-vertical")
+            md-menu-content
+              md-menu-item
+                md-button(app-logout)
+                  md-icon(md-svg-icon="exit-to-app")
+                  | Sair
+
+        nav.menu
+          md-button(ng-href="/", toggle-sidenav)
+            md-icon(md-svg-icon="chart-areaspline", size=24)
+            | Dashboard
+          md-button(ng-href="/insumos", toggle-sidenav)
+            md-icon(md-svg-icon="shape-plus", size=24)
+            | Insumos
+          md-button(ng-href="/produtos", toggle-sidenav)
+            md-icon(md-svg-icon="cube-outline", size=24)
+            | Produtos
+          md-button(ng-href="/grupos", toggle-sidenav)
+            md-icon(md-svg-icon="group", size=24)
+            | Grupos
+          md-button(ng-href="/impostos", toggle-sidenav)
+            md-icon(md-svg-icon="margin", size=24)
+            | Impostos
+          md-button(ng-href="/cambios", toggle-sidenav)
+            md-icon(md-svg-icon="coin", size=24)
+            | Câmbios
+          md-button(ng-href="/propostas", toggle-sidenav)
+            md-icon(md-svg-icon="clipboard-check", size=24)
+            | Propostas
+          md-button(ng-href="/fluxo-de-caixa", toggle-sidenav)
+            md-icon(md-svg-icon="clock-end", size=24)
+            | Fluxo de Caixa
+          md-button(ng-href="/usuarios", toggle-sidenav)
+            md-icon(md-svg-icon="account-multiple", size=24)
+            | Usuários
+
+
+      #main(layout='column', flex, ng-class="{ 'main-tabs-header': headerTabs.tabs.length > 0 }")
+        div
+          md-toolbar.main-toolbar(layout='row')
+            .md-toolbar-tools
+              md-button.md-icon-button(hide-gt-sm='', toggle-sidenav)
+                md-icon(md-svg-icon="menu", size=24)
+
+              h1(output-page-title)
+
+          md-toolbar(ng-show="headerTabs.tabs.length > 0")
+            md-tabs(md-selected="headerTabs.current")
+              md-tab(ng-repeat="text in headerTabs.tabs") {{text}}
+
+        md-content.scroll-y(layout-padding,md-scroll-y)
+          ng-view.main-content
+
+    script(src='/js/libs.min.js?v=@NOW')
+    script(src='/js/all.min.js?v=@NOW')
+    script(src='/js/templates.min.js?v=@NOW')

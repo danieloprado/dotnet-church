@@ -1,0 +1,105 @@
+.p {
+    padding: 20px;
+}
+
+.p-l-md {
+    padding-left: 20px;
+}
+
+
+.p-t-md {
+    padding-top: 20px;
+}
+
+.p-t-none {
+    padding-top: 0;
+}
+
+.p-b-sm {
+    padding-bottom: 10px;
+}
+
+.p-b-none {
+    padding-bottom: 0 !important;
+}
+
+.p-input {
+    padding: 15px 0 !important;
+}
+
+.p-card-list {
+    padding: 0 16px !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-capitalize {
+    text-transform: capitalize !important;
+}
+
+.text-danger {
+    color: $danger !important;
+}
+
+.text-success {
+    color: $success !important;
+}
+
+.m-input {
+    margin-top: 30px !important;
+}
+
+
+.m-b {
+    margin-bottom: 18px;
+}
+
+.m-l {
+    margin-left: 18px;
+}
+
+.m-t-none {
+    margin-top: 0;
+}
+
+.m-b-none {
+    margin-bottom: 0;
+}
+
+.m-t {
+    margin-top: 20px;
+}
+
+.m-t-xs {
+    margin-top: 5px;
+}
+
+.m-none {
+    margin: 0;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.pre {
+    white-space: pre-line;
+}
+
+.no-record {
+    opacity: 0.8;
+    font-style: italic;
+    font-size: 14px;
+    margin-bottom: 10px;
+
+    &:before,
+    &:after {
+        content: " - ";
+    }
+}

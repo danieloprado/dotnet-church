@@ -1,0 +1,24 @@
+﻿md-card-content
+  md-input-container(md-no-float)
+    md-icon(md-svg-icon="magnify")
+    input(ng-model='$ctrl.query.filter', placeholder="Pesquisar")
+
+md-table-container
+
+  table(md-table, md-progress="$ctrl.dataPromise")
+    thead(md-head, md-order="$ctrl.query.order")
+      tr(md-row)
+        th(md-column, md-order-by="date") Data de inclusão
+        th(md-column, md-order-by="user.name") Usuário
+        th(md-column,width="120")
+
+    tbody(md-body)
+      tr(md-row, ng-repeat="log in $ctrl.data | filter: $ctrl.query.filter | orderBy: $ctrl.query.order")
+        td(md-cell) {{log.date  | date:'medium'}}
+        td(md-cell) {{log.user.name}}
+        td.text-right(md-cell)
+          md-button.md-icon-button(ng-click="$ctrl.details(log, $event)")
+            md-icon(md-svg-icon="open-in-app")
+
+md-card-content(ng-show="$ctrl.data.length == 0",align="center", padding)
+  | Nenhum alteração cadastrada

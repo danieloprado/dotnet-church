@@ -1,0 +1,36 @@
+﻿.log-table-component-details {
+    md-list-item {
+        padding: 0;
+
+        h3 {
+            padding: 0 25px;
+        }
+    }
+
+    .list-details {
+        line-height: 18px !important;
+        font-size: 14px !important;
+        letter-spacing: 0.2px !important;
+        width: 100%;
+        table-layout: fixed;
+        border-spacing: 0;
+        border-collapse: collapse;
+        margin: 10px 0;
+
+        td {
+            padding: 5px;
+
+            &:first-child {
+                padding-left: 25px;
+            }
+
+            &:last-child {
+                padding-right: 25px;
+            }
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(black, 0.05);
+        }
+    }
+}

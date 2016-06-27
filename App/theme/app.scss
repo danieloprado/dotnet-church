@@ -1,0 +1,146 @@
+@import "variables";
+@import "mixin";
+@import "components";
+@import "utilities";
+@import "fonts";
+@import "../components/component-page/style";
+@import "../components/login/style";
+@import "../components/log-table/style";
+@import "../modules/product/select/style";
+
+.text-accent {
+    color: $accent;
+}
+
+body {
+    background: $background-color;
+    color: $color;
+    fill: $color;
+}
+
+[ng-click] {
+    cursor: pointer;
+}
+
+md-toolbar {
+    position: relative;
+    min-height: 0;
+
+    &.main-toolbar {
+        background: $white;
+        color: $color;
+        fill: $color;
+
+        md-icon {
+            fill: currentColor;
+            color: inherit;
+        }
+
+        + md-toolbar {
+
+            &:before {
+                box-shadow: 0 2px 4px rgba(0,0,0,0.14);
+            }
+
+            md-tabs-wrapper {
+                background: white !important;
+
+                md-tab-item, md-icon {
+                    color: $color !important;
+                    user-select: none;
+                }
+            }
+        }
+    }
+
+    &:before {
+        top: 0;
+        box-shadow: 0 0 4px rgba(0,0,0,.14),0 -1px 8px rgba(0,0,0,.28);
+        content: "";
+        height: 100%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        will-change: top,left;
+        z-index: -1;
+    }
+}
+
+.main-tabs-header {
+
+    md-toolbar.main-toolbar:before {
+        display: none;
+    }
+
+
+    .header-tabs-content md-tabs-wrapper {
+        display: none;
+    }
+}
+
+
+.error-message {
+    color: $danger;
+    margin-bottom: 20px;
+}
+
+.md-sidenav-left {
+    max-width: 250px;
+    background: $side-background;
+    color: $side-color;
+    fill: $side-color;
+
+    header {
+        background: $side-header;
+        fill: white;
+
+        .logo {
+            margin: 10px 0;
+            text-align: center;
+
+            img {
+                max-width: 100px;
+                max-height: 100px;
+            }
+
+            p {
+                float: none;
+                width: 100%;
+                padding: 10px 0;
+            }
+        }
+
+        p {
+            margin: 0;
+            float: left;
+            padding: 19px;
+            width: calc(100% - 100px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        md-menu {
+            float: right;
+        }
+    }
+
+    .md-button {
+        display: block;
+        text-align: left;
+        text-transform: none;
+        letter-spacing: .5px;
+    }
+}
+
+.main-content {
+    background: none;
+    display: block;
+    padding-bottom: 90px;
+
+    @include media-max-breakpoints(xs) {
+        padding: 0;
+        margin: -5px;
+        padding-bottom: 70px;
+    }
+}
