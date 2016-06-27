@@ -1,4 +1,4 @@
-angular.module('icbApp', [
+angular.module('app', [
   'ngSanitize',
   'ngMaterial',
   'ngMdIcons',

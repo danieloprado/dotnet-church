@@ -9,9 +9,9 @@
       scope: false,
       link: (scope, elem) => {
         elem.on("click", () => {
-          LoginService.logout().then(_ => {
-            LoginService.openLogin();
-          });
+          // LoginService.logout().then(_ => {
+          //   LoginService.openLogin();
+          // });
         });
       }
     };
