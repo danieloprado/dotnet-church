@@ -55,7 +55,7 @@ html(lang='en', ng-app='icbApp')
               md-button.md-icon-button(hide-gt-sm='', ng-click="toggleSidenav()")
                 md-icon(md-svg-icon="menu", size=24)
 
-              h1(output-page-title)
+              h1(icb-output-page-title)
 
           md-toolbar(ng-show="headerTabs.tabs.length > 0")
             md-tabs(md-selected="headerTabs.current")
@@ -65,5 +65,5 @@ html(lang='en', ng-app='icbApp')
           ng-view.main-content
 
     script(src='/js/libs.min.js')
-    script(src='/js/templates.min.js')
     script(src='/js/all.min.js')
+    script(src='/js/templates.min.js')
