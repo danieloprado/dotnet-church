@@ -3,134 +3,139 @@
 @import "components";
 @import "utilities";
 @import "fonts";
-@import "../components/component-page/style";
-@import "../components/login/style";
-@import "../components/log-table/style";
-@import "../modules/product/select/style";
 
-.text-accent {
-    color: $accent;
+.padding {
+  padding: 8px;
 }
 
 body {
-    background: $background-color;
-    color: $color;
-    fill: $color;
-}
-
-[ng-click] {
-    cursor: pointer;
+  background: $background-color;
+  color: $color;
+  fill: $color;
 }
 
 md-toolbar {
-    position: relative;
-    min-height: 0;
+  position: relative;
+  min-height: 0;
+  height: 56px;
 
-    &.main-toolbar {
-        background: $white;
-        color: $color;
-        fill: $color;
+  &.main-toolbar {
+    background: $white;
+    color: $color;
+    fill: $color;
 
-        md-icon {
-            fill: currentColor;
-            color: inherit;
-        }
-
-        + md-toolbar {
-
-            &:before {
-                box-shadow: 0 2px 4px rgba(0,0,0,0.14);
-            }
-
-            md-tabs-wrapper {
-                background: white !important;
-
-                md-tab-item, md-icon {
-                    color: $color !important;
-                    user-select: none;
-                }
-            }
-        }
+    md-icon {
+      fill: $color;
     }
+  }
 
-    &:before {
-        top: 0;
-        box-shadow: 0 0 4px rgba(0,0,0,.14),0 -1px 8px rgba(0,0,0,.28);
-        content: "";
-        height: 100%;
-        left: 0;
-        right: 0;
-        position: absolute;
-        will-change: top,left;
-        z-index: -1;
-    }
+  .md-toolbar-tools {
+    height: 56px;
+  }
+
+  &:before {
+    top: 0;
+    box-shadow: 0 0 4px rgba(0,0,0,.14),0 -1px 8px rgba(0,0,0,.28);
+    content: "";
+    height: 100%;
+    left: 0;
+    right: 0;
+    position: absolute;
+    will-change: top,left;
+  }
 }
-
-.main-tabs-header {
-
-    md-toolbar.main-toolbar:before {
-        display: none;
-    }
-
-
-    .header-tabs-content md-tabs-wrapper {
-        display: none;
-    }
-}
-
 
 .error-message {
-    color: $danger;
-    margin-bottom: 20px;
+  color: $danger;
+  margin-bottom: 20px;
+}
+
+.content-hover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $white;
+  z-index: 99;
+  overflow: auto;
+  animation-duration: 0.5s;
+  @include transition();
+}
+
+.login-content {
+  // background-image: url(../imgs/background.png);
+  // background-size: cover;
+  // background-position: center;
+  .logo {
+    margin-bottom: 60px;
+    text-align: center;
+
+    img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 300px;
+    height: 360px;
+    max-width: calc(100% - 30px);
+  }
 }
 
 .md-sidenav-left {
-    max-width: 250px;
-    background: $side-background;
-    color: $side-color;
-    fill: $side-color;
+  max-width: 250px;
+  background: $side-background;
+  color: $side-color;
+  fill: $side-color;
 
-    header {
-        background: $side-header;
-        fill: white;
+  header {
+    background: $side-header;
+    fill: white;
 
-        .logo {
-            margin: 10px 0;
-            text-align: center;
+    .logo {
+      margin: 10px 0;
+      text-align: center;
 
-            img {
-                max-width: 100px;
-                max-height: 100px;
-            }
+      img {
+        max-width: 100px;
+        max-height: 100px;
+      }
 
-            p {
-                float: none;
-                width: 100%;
-                padding: 10px 0;
-            }
-        }
-
-        p {
-            margin: 0;
-            float: left;
-            padding: 19px;
-            width: calc(100% - 100px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        md-menu {
-            float: right;
-        }
+      p {
+        float: none;
+        width: 100%;
+        padding: 10px 0;
+      }
     }
 
-    .md-button {
-        display: block;
-        text-align: left;
-        text-transform: none;
-        letter-spacing: .5px;
+    p {
+      margin: 0;
+      float: left;
+      padding: 19px;
+      width: calc(100% - 100px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    md-menu {
+      float: right;
+    }
+  }
+
+  .md-button {
+    display: block;
+    text-align: left;
+    text-transform: none;
+  }
 }
 
 .main-content {

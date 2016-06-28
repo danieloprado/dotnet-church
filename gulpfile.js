@@ -1,17 +1,20 @@
 var gulp = require('gulp'),
   $ = require('gulp-load-plugins')(),
+  templateCache = require('gulp-angular-templatecache'),
   rimraf = require('rimraf');
 
 var paths = {
   js: [
-    'App/js/app/module.js', 'App/js/auth/module.js', 'App/js/**/*.js'
+    'App/main.js', 'App/**/*.js'
   ],
-  sass: 'App/scss/app.scss',
-  jade: 'App/jade/**/*.jade',
+  sass: 'App/theme/app.scss',
+
+  views: ['App/**/*.jade', '!App/index.jade'],
+  viewIndex: 'App/index.jade',
 
   dist: 'wwwroot/',
-  imgs: 'App/imgs/**/*',
-  svgs: 'App/svgs/**/*',
+  imgs: 'App/theme/imgs/**/*',
+  svgs: 'App/theme/svgs/**/*',
 
   cssLibs: [
     'bower_components/animate.css/animate.min.css',
@@ -96,12 +99,22 @@ gulp.task("sass", () =>
   })));
 
 //JADE
-gulp.task('jade', () =>
-  gulp.src(paths.jade)
-  .pipe($.jade({
-    pretty: true
-  }))
-  .pipe(gulp.dest(paths.dist)));
+gulp.task('views:index', () => {
+    return gulp.src(paths.viewIndex)
+    .pipe($.jade({ pretty: false }))
+    //.pipe($.replace("@NOW", new Date() * 1))
+    .pipe(gulp.dest(paths.dist))
+});
+
+gulp.task('views', ['views:index'], () => {
+    return gulp.src(paths.views)
+    .pipe($.jade({ pretty: false }))
+    //.pipe($.replace("@NOW", new Date() * 1))
+    .pipe(templateCache("templates.min.js", { module: "icbApp", root: "/views" }))
+    .pipe(gulp.dest(paths.dist + "/js"));
+    //.pipe(gulp.dest(paths.dist + "/views"))
+});
+
 
 //JS
 gulp.task('js:hint', () =>
@@ -122,10 +135,10 @@ gulp.task('js', ['js:hint'], () =>
 
 gulp.task('watch', function() {
   $.livereload.listen();
-  gulp.watch('App/scss/**/*.scss', ['sass']);
-  gulp.watch(paths.jade, ['jade']);
+  gulp.watch('App/**/*.scss', ['sass']);
+  gulp.watch('App/**/*.jade', ['views']);
   gulp.watch(paths.js, ['js']);
 });
 
-gulp.task('compile', ['libs', 'jade', 'sass', 'js']);
+gulp.task('compile', ['libs', 'views', 'sass', 'js']);
 gulp.task('default', ['compile', 'watch']);
