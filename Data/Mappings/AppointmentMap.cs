@@ -1,6 +1,5 @@
 using ChurchWeb.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
 
 namespace ChurchWeb.Data.Mappings
 {
