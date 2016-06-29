@@ -4,13 +4,11 @@ var gulp = require('gulp'),
   rimraf = require('rimraf');
 
 var paths = {
-  js: [
-    'App/main.js', 'App/**/*.js'
-  ],
-  sass: 'App/theme/app.scss',
+  js: ['App/main.js', 'App/**/*.js'],
+  theme: ['App/theme/app.scss'],
 
-  views: ['App/**/*.jade', '!App/index.jade'],
-  viewIndex: 'App/index.jade',
+  views: ['App/**/*.pug', '!App/index.pug'],
+  viewIndex: 'App/index.pug',
 
   dist: 'wwwroot/',
   imgs: 'App/theme/imgs/**/*',
@@ -23,7 +21,6 @@ var paths = {
     'bower_components/angular-material-icons/angular-material-icons.css',
     'bower_components/material-design-icons/iconfont/material-icons.css'
   ],
-
 
   jsLibs: [
     'bower_components/jQuery/dist/jquery.min.js',
@@ -58,87 +55,83 @@ var paths = {
   ]
 };
 
-//CLEAN
-gulp.task('clean', cb => rimraf(paths.dist, cb));
+
 
 //LIBS
-gulp.task('css:libs', () =>
-  gulp.src(paths.cssLibs)
-  .pipe($.concat('libs.min.css'))
-  .pipe(gulp.dest(paths.dist + 'css')));
+gulp.task('css:libs', () => {
+  return gulp.src(paths.cssLibs)
+    .pipe($.concat('libs.min.css'))
+    .pipe(gulp.dest(paths.dist + 'css'));
+});
 
-gulp.task("js:libs", () =>
-  gulp.src(paths.jsLibs)
-  .pipe($.concat("libs.min.js"))
-  .pipe(gulp.dest(paths.dist + "js")));
+gulp.task("js:libs", () => {
+  return gulp.src(paths.jsLibs)
+    .pipe($.concat("libs.min.js"))
+    .pipe(gulp.dest(paths.dist + "js"));
+});
 
-gulp.task('imgs', () =>
-  gulp.src(paths.imgs)
-  .pipe(gulp.dest(paths.dist + 'imgs')));
+gulp.task('imgs', () => {
+  return gulp.src(paths.imgs)
+    .pipe(gulp.dest(paths.dist + 'imgs'));
+});
 
-gulp.task('svgs', () =>
-  gulp.src(paths.svgs)
-  .pipe(gulp.dest(paths.dist + 'svgs')));
+gulp.task('svgs', () => {
+  return gulp.src(paths.svgs)
+    .pipe(gulp.dest(paths.dist + 'svgs'));
+});
 
 gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs']);
 
 //SASS
-gulp.task("sass", () =>
-  gulp.src(paths.sass)
-  .pipe($.sourcemaps.init())
-  .pipe($.sass({
-    outputStyle: "compressed"
-  }).on('error', $.sass.logError))
-  .pipe($.autoprefixer({
-    browsers: ["last 2 versions", "ie >= 9"]
-  }))
-  .pipe($.sourcemaps.write())
-  .pipe(gulp.dest(paths.dist + 'css'))
-  .pipe($.livereload({
-    start: true
-  })));
+gulp.task("theme", () => {
+  return gulp.src(paths.theme)
+    .pipe($.sourcemaps.init())
+    .pipe($.sass({ outputStyle: "compressed" }).on('error', $.sass.logError))
+    .pipe($.autoprefixer({ browsers: ["last 2 versions", "ie >= 9"] }))
+    .pipe($.sourcemaps.write("/"))
+    .pipe(gulp.dest(paths.dist + 'css'));
+});
 
 //JADE
 gulp.task('views:index', () => {
-    return gulp.src(paths.viewIndex)
+  return gulp.src(paths.viewIndex)
     .pipe($.jade({ pretty: false }))
     //.pipe($.replace("@NOW", new Date() * 1))
     .pipe(gulp.dest(paths.dist))
 });
 
 gulp.task('views', ['views:index'], () => {
-    return gulp.src(paths.views)
+  return gulp.src(paths.views)
     .pipe($.jade({ pretty: false }))
     //.pipe($.replace("@NOW", new Date() * 1))
     .pipe(templateCache("templates.min.js", { module: "icbApp", root: "/views" }))
     .pipe(gulp.dest(paths.dist + "/js"));
-    //.pipe(gulp.dest(paths.dist + "/views"))
 });
 
-
 //JS
-gulp.task('js:hint', () =>
-  gulp.src(paths.js)
-  .pipe($.jshint())
-  .pipe($.jshint.reporter('default')));
+gulp.task('js:hint', () => {
+  return gulp.src(paths.js)
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('default'));
+});
 
-gulp.task('js', ['js:hint'], () =>
-  gulp.src(paths.js)
-  .pipe($.sourcemaps.init())
-  .pipe($.concat('all.min.js'))
-  .pipe($.babel({
-    presets: ['es2015']
-  }))
-  .pipe($.uglify())
-  .pipe($.sourcemaps.write())
-  .pipe(gulp.dest(paths.dist + 'js')));
+gulp.task('js', ['js:hint'], () => {
+  return gulp.src(paths.js)
+    .pipe($.sourcemaps.init())
+    .pipe($.concat('all.min.js'))
+    .pipe($.babel({ presets: ['es2015'] }))
+    .pipe($.uglify())
+    .pipe($.sourcemaps.write('/'))
+    .pipe(gulp.dest(paths.dist + 'js'));
+});
 
-gulp.task('watch', function() {
-  $.livereload.listen();
-  gulp.watch('App/**/*.scss', ['sass']);
-  gulp.watch('App/**/*.jade', ['views']);
+gulp.task('watch', () => {
+  gulp.watch('App/**/*.scss', ['theme']);
+  gulp.watch('App/**/*.pug', ['views']);
   gulp.watch(paths.js, ['js']);
 });
 
-gulp.task('compile', ['libs', 'views', 'sass', 'js']);
+gulp.task('compile', ['libs', 'views', 'theme', 'js']);
 gulp.task('default', ['compile', 'watch']);
+
+gulp.task('clean', _ => $.rimraf(paths.dist));
