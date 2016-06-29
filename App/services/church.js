@@ -5,7 +5,7 @@
     'API',
     '$http',
     '$mdDialog',
-    'Auth',
+    'authService',
     AuthChurchService
   ]);
 

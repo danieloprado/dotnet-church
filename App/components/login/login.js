@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('icbApp').component("appLoginComponent", {
-    templateUrl: "/views/components/login/view.html",
+    templateUrl: "/views/components/login/login.html",
     controller: Login,
     bindings: {
       cancel: "&",

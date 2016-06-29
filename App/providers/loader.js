@@ -15,7 +15,7 @@
     };
 
     const obj = (promise) => {
-      if (angular.isArray(target)) {
+      if (angular.isArray(promise)) {
         promise = $q.all(promise);
       }
 

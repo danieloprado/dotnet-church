@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('app').factory('componentPage', ComponentPage);
+  angular.module('icbApp').factory('componentPage', ComponentPage);
 
   function ComponentPage($rootScope, $q, ComponentTemplate) {
 

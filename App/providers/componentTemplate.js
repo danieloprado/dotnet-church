@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module("app").factory("ComponentTemplate", ComponentTemplate);
+  angular.module("icbApp").factory("ComponentTemplate", ComponentTemplate);
 
   function ComponentTemplate(lodash) {
     const resolveParams = (resolveItems) => {

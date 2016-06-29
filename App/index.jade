@@ -3,7 +3,7 @@ html(lang='en', ng-app='icbApp')
   head
     meta(name='viewport', content='initial-scale=1')
     meta(charset='UTF-8')
-    title ICB - {{pageTitle}}
+    title ICB
 
     link(rel='stylesheet', href='/css/libs.min.css')
     link(rel='stylesheet', href='/css/app.css')
@@ -11,9 +11,10 @@ html(lang='en', ng-app='icbApp')
     style.
       .ng-cloak{ display: none }
 
-  body.ng-cloak(layout='column', ng-controller='icbApp.appCtrl')
-    icb-loading
-    //icb-login
+  body.ng-cloak(layout='column')
+    app-loader
+    app-component-page
+
 
     div(layout="row", flex)
       md-sidenav.md-sidenav-left.md-whiteframe-4dp(layout='column', md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
@@ -52,7 +53,7 @@ html(lang='en', ng-app='icbApp')
         div
           md-toolbar.main-toolbar(layout='row')
             .md-toolbar-tools
-              md-button.md-icon-button(hide-gt-sm='', ng-click="toggleSidenav()")
+              md-button.md-icon-button(hide-gt-sm='', toggle-sidenav)
                 md-icon(md-svg-icon="menu", size=24)
 
               h1(icb-output-page-title)

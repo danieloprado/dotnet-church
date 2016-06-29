@@ -8,10 +8,9 @@
       '$location',
       'Toast',
       'Loader',
-      'Auth',
-      'Dialog',
-      'LoginService',
-      function($scope, $mdDialog, $location, Toast, Loader, Auth, Dialog, LoginService) {
+      'authService',
+      'loginService',
+      function($scope, $mdDialog, $location, Toast, Loader, Auth, LoginService) {
         $scope.model = {
           email: "danieloprado@outlook.com",
           password: "123"

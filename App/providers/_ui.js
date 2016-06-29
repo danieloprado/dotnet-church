@@ -6,6 +6,6 @@
   function UI(Loader, Toast, Confirm) {
     return { Loader, Toast, Confirm };
   }
-  UI.$inject = ['appLoader', 'appToast', 'appConfirm'];
+  UI.$inject = ['Loader', 'Toast', 'Confirm'];
 
 })(angular);

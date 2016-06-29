@@ -3,7 +3,7 @@
 
   angular.module('icbAuth', ['ngRoute'])
     .config(['$httpProvider', configInterceptor])
-    .run(['$rootScope', '$location', 'Auth', 'LoginService', loginCheck]);
+    .run(['$rootScope', '$location', 'authService', 'loginService', loginCheck]);
 
 
   function configInterceptor($httpProvider) {

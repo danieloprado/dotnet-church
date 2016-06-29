@@ -1,29 +1,14 @@
-(function (angular) {
+(function(angular) {
   'use strict';
 
   angular.module('icbApp')
-    .config(['$mdDateLocaleProvider', configLocale])
     .config(['uiGmapGoogleMapApiProvider', configMaps])
     .config(['$mdIconProvider', configIcons])
     .config(['$mdThemingProvider', configTheme]);
 
-  function configLocale($mdDateLocaleProvider) {
-    $mdDateLocaleProvider.formatDate = function (date) {
-      if (!date) return null;
-
-      var fix = (number) => {
-        return (number < 10 ? "0" : "") + number;
-      };
-
-      return fix(date.getDate()) + "/" +
-        fix(date.getMonth() + 1) + "/" +
-        date.getFullYear();
-    };
-  }
-
   function configMaps(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-      //    key: 'your api key',
+      //key: 'your api key',
       libraries: 'places,geocoder'
     });
   }

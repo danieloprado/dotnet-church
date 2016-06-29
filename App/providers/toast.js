@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('app').factory('Toast', ['$mdToast', Toast]);
+  angular.module('icbApp').factory('Toast', ['$mdToast', Toast]);
 
   function Toast($mdToast) {
     let toast, promise;

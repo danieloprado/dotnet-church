@@ -15,7 +15,7 @@
 
     const openLogin = function () {
       if (!loginPromise) {
-        loginPromise = componentPage.show(Components.Login.componentName);
+        loginPromise = componentPage("appLoginComponent");
         loginPromise.finally(_ => loginPromise = null);
       }
 

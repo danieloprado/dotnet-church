@@ -3,6 +3,10 @@
 @import "components";
 @import "utilities";
 @import "fonts";
+@import "../components/component-page/componentPage";
+@import "../components/loader/loader";
+@import "../components/login/login";
+
 
 .padding {
   padding: 8px;
