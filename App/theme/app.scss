@@ -1,69 +1,49 @@
-@import "variables";
-@import "mixin";
-@import "components";
-@import "utilities";
-@import "fonts";
-@import "../components/component-page/componentPage";
-@import "../components/loader/loader";
-@import "../components/login/login";
-
+@import 'variables';
+@import 'mixin';
+@import 'components';
+@import 'utilities';
+@import 'fonts';
+@import '../components/component-page/componentPage';
+@import '../components/loader/loader';
+@import '../components/login/login';
 
 .padding {
   padding: 8px;
 }
 
 body {
-  background: $background-color;
   color: $color;
+  background: $background-color;
   fill: $color;
 }
 
-md-toolbar {
-  position: relative;
-  min-height: 0;
-  height: 56px;
-
-  &.main-toolbar {
-    background: $white;
-    color: $color;
-    fill: $color;
-
-    md-icon {
-      fill: $color;
-    }
+.main-tabs-header {
+  md-toolbar.main-toolbar:before {
+    display: none;
   }
 
-  .md-toolbar-tools {
-    height: 56px;
-  }
 
-  &:before {
-    top: 0;
-    box-shadow: 0 0 4px rgba(0,0,0,.14),0 -1px 8px rgba(0,0,0,.28);
-    content: "";
-    height: 100%;
-    left: 0;
-    right: 0;
-    position: absolute;
-    will-change: top,left;
+  .header-tabs-content md-tabs-wrapper {
+    display: none;
   }
 }
 
 .error-message {
-  color: $danger;
   margin-bottom: 20px;
+  color: $danger;
 }
 
 .content-hover {
   position: fixed;
+  z-index: 99;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
-  background: $white;
-  z-index: 99;
+  left: 0;
   overflow: auto;
-  animation-duration: 0.5s;
+  animation-duration: .5s;
+  background: $white;
+
   @include transition();
 }
 
@@ -84,20 +64,20 @@ md-toolbar {
   .content {
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
+    left: 0;
     width: 300px;
-    height: 360px;
     max-width: calc(100% - 30px);
+    height: 360px;
+    margin: auto;
   }
 }
 
 .md-sidenav-left {
   max-width: 250px;
-  background: $side-background;
   color: $side-color;
+  background: $side-background;
   fill: $side-color;
 
   header {
@@ -121,12 +101,12 @@ md-toolbar {
     }
 
     p {
-      margin: 0;
       float: left;
-      padding: 19px;
-      width: calc(100% - 100px);
-      white-space: nowrap;
       overflow: hidden;
+      width: calc(100% - 100px);
+      margin: 0;
+      padding: 19px;
+      white-space: nowrap;
       text-overflow: ellipsis;
     }
 
@@ -143,13 +123,13 @@ md-toolbar {
 }
 
 .main-content {
-    background: none;
-    display: block;
-    padding-bottom: 90px;
+  display: block;
+  padding-bottom: 90px;
+  background: none;
 
-    @include media-max-breakpoints(xs) {
-        padding: 0;
-        margin: -5px;
-        padding-bottom: 70px;
-    }
+  @include media-max-breakpoints(xs) {
+    margin: -5px;
+    padding: 0;
+    padding-bottom: 70px;
+  }
 }

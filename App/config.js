@@ -5,6 +5,7 @@
     .config(['$httpProvider', configAuth])
     .config(['uiGmapGoogleMapApiProvider', configMaps])
     .config(['$mdIconProvider', configIcons])
+    .config(['mdFormValidatorProvider', configErrorMessages])
     .config(['$mdThemingProvider', configTheme]);
 
   function configAuth($httpProvider) {
@@ -20,6 +21,15 @@
 
   function configIcons($mdIconProvider) {
     $mdIconProvider.defaultIconSet('/svgs/mdi.svg');
+  }
+
+  function configErrorMessages(mdFormValidatorProvider) {
+      mdFormValidatorProvider.setMessage("required", "Obrigatório");
+      mdFormValidatorProvider.setMessage("date", "Data inválida");
+      mdFormValidatorProvider.setMessage("email", "Email inválido");
+      mdFormValidatorProvider.setMessage("min", "Deve ter ser no minimo {min}");
+      mdFormValidatorProvider.setMessage("max", "Deve ter ser no máximo {max}");
+      mdFormValidatorProvider.setMessage("md-maxlength", "Deve ter no máximo {md-maxlength} caracteres");
   }
 
   function configTheme($mdThemingProvider, $translateProvider) {

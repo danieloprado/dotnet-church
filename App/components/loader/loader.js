@@ -6,7 +6,7 @@
       <div ng-if="!$ctrl.hide">
         <md-progress-circular
               class="md-accent"
-              md-diameter="120"
+              md-diameter="60"
               md-mode="indeterminate" />
         </md-progress-circular>
       </div>`,

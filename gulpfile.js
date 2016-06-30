@@ -26,6 +26,9 @@ const paths = {
 
     //pickers
     'bower_components/mdPickers/dist/mdPickers.min.css',
+
+    //markdown
+    'bower_components/simplemde/dist/simplemde.min.css'
   ],
 
   jsLibs: [
@@ -55,7 +58,7 @@ const paths = {
 
     //markdown
     'bower_components/marked/marked.min.js',
-    'bower_components/angular-marked/dist/angular-marked.min.js',
+    'bower_components/simplemde/dist/simplemde.min.js',
 
     //pickers
     'bower_components/moment/min/moment.min.js',
@@ -63,7 +66,8 @@ const paths = {
     'bower_components/mdPickers/dist/mdPickers.min.js',
 
     //validator
-    'bower_components/md-form-validator/dist/md-form-validator.min.js'
+    'bower_components/md-form-validator/dist/md-form-validator.min.js',
+    "bower_components/angular-validator-async/dist/angular-validator-async.min.js"
 
   ]
 };

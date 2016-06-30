@@ -1,28 +1,26 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbInformative')
-    .config([
-      '$routeProvider',
-      Routes
-    ]);
+  angular.module('icbInformative').config(Routes);
 
   function Routes($routeProvider) {
     $routeProvider
-      .when('/informative', {
+      .when('/informativos', {
         templateUrl: '/views/pages/informative/list/list.html',
         controller: 'icbInformative.listCtrl',
         controllerAs: "$ctrl"
       })
-      .when('/informative/create', {
+      .when('/informativos/novo', {
         templateUrl: '/views/pages/informative/form/form.html',
         controller: 'icbInformative.formCtrl',
         controllerAs: "$ctrl"
       })
-      .when('/informative/:id', {
+      .when('/informativos/:id/editar', {
         templateUrl: '/views/pages/informative/form/form.html',
         controller: 'icbInformative.formCtrl',
+        controllerAs: "$ctrl"
       });
   }
+  Routes.$inject = ['$routeProvider'];
 
 })(angular);

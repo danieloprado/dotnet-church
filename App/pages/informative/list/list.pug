@@ -1,7 +1,7 @@
 icb-title Informativos
 
-md-button.md-fab.md-fab-bottom-right(href="/informative/create")
-	ng-md-icon(icon="add",size=32)
+md-button.md-fab.md-fab-bottom-right(href="/informativos/novo")
+	md-icon(md-svg-icon="plus",size=32)
 
 md-card
 
@@ -19,7 +19,7 @@ md-card
 					td(md-cell) {{informative.title}}
 					td(md-cell) {{informative.date | date}}
 					td.text-right(md-cell)
-						md-button.md-icon-button(href="/informative/{{informative.id}}")
+						md-button.md-icon-button(href="/informativos/{{informative.id}}/editar")
 							md-icon(md-svg-icon="pencil")
 						md-button.md-icon-button(ng-click="$ctrl.delete($event, informative, $index)")
 							md-icon(md-svg-icon="delete")

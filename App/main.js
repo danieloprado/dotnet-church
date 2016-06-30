@@ -8,7 +8,6 @@
     'ngAnimate',
     'ngRoute',
     'angular-jwt',
-    'hc.marked',
     'md.data.table',
     'mdFormValidator',
     'uiGmapgoogle-maps',

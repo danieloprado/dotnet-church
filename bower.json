@@ -19,7 +19,9 @@
     "lodash": "^4.13.1",
     "angular-validator-async": "^0.0.1",
     "angular-input-masks": "^2.4.0",
-    "mdPickers": "^0.7.5"
+    "mdPickers": "^0.7.5",
+    "jQuery": "^3.0.0",
+    "simplemde": "^1.11.2"
   },
   "resolutions": {
     "angular": "^1.4.0",

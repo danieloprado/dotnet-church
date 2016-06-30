@@ -2,41 +2,35 @@
   'use strict';
 
   angular.module('icbInformative').controller("icbInformative.formCtrl", [
-    '$scope',
     '$routeParams',
     '$location',
-    'lodash',
-    'Loader',
-    'Toast',
+    'UI',
     'informativeService',
     FormCtrl
   ]);
 
-  function FormCtrl($scope, $routeParams, $location, _, Loader, Toast, service) {
-    $scope.model = {};
-    $scope.editing = false;
+  function FormCtrl($routeParams, $location, UI, informativeService) {
+    this.model = {};
+    this.editing = false;
 
     if ($routeParams.id) {
-      Loader(service.get($routeParams.id)).then(informative => {
-        $scope.model = informative;
-        $scope.editing = true;
+      UI.Loader(informativeService.get($routeParams.id)).then(informative => {
+        console.log(informative);
+        this.model = informative;
+        this.editing = true;
       });
     }
 
-
-
-    $scope.getFullMarkdown = () => {
-      let title = $scope.model.title ? "# " + $scope.model.title : "";
-      return `${title}\n\n\n${$scope.model.message || ""}`;
+    this.getFullMarkdown = () => {
+      let title = this.model.title ? "# " + this.model.title : "";
+      return `${title}\n\n\n${this.model.message || ""}`;
     };
 
-    $scope.submit = () => {
-      Loader(service.save($scope.model))
-        .then((informative) => {
-          Toast("Salvo");
-          $location.path('/informative');
-        })
-        .catch((res) => Toast.httpHandler(res));
+    this.submit = () => {
+      UI.Loader(informativeService.save(this.model)).then((informative) => {
+        UI.Toast("Salvo");
+        $location.path('/informative');
+      });
     };
 
   }
