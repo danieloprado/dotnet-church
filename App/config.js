@@ -2,9 +2,14 @@
   'use strict';
 
   angular.module('icbApp')
+    .config(['$httpProvider', configAuth])
     .config(['uiGmapGoogleMapApiProvider', configMaps])
     .config(['$mdIconProvider', configIcons])
     .config(['$mdThemingProvider', configTheme]);
+
+  function configAuth($httpProvider) {
+      $httpProvider.interceptors.push('authInterceptor');
+  }
 
   function configMaps(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({

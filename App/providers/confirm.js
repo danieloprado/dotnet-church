@@ -5,9 +5,10 @@
 
   function Confirm($q, $mdDialog, $window) {
 
-    return (title, message, $event) => {
+    return (message, $event) => {
       const confirm = $mdDialog.confirm()
-        .htmlContent(`<h2 class="md-title md-dialog-title">${$window.marked(title)}</h2>${$window.marked(message)}`)
+        .title("Confirmar")
+        .htmlContent(`${$window.marked(message)}`)
         .targetEvent($event)
         .ok('Sim')
         .cancel('Não');

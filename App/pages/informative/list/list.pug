@@ -7,21 +7,21 @@ md-card
 
 	md-table-container
 
-		table(md-table, md-progress="dataPromise",)
-			thead(md-head, md-order="query.order")
+		table(md-table, md-progress="$ctrl.dataPromise",)
+			thead(md-head, md-order="$ctrl.query.order")
 				tr(md-row)
 					th(md-column, md-order-by="title") Titulo
 					th(md-column, md-order-by="date") Dia
 					th(md-column,width="120")
 
 			tbody(md-body)
-				tr(md-row, ng-repeat="informative in informatives | filter:query.filter | orderBy:query.order")
+				tr(md-row, ng-repeat="informative in $ctrl.informatives | filter:query.filter | orderBy:query.order")
 					td(md-cell) {{informative.title}}
 					td(md-cell) {{informative.date | date}}
 					td.text-right(md-cell)
 						md-button.md-icon-button(href="/informative/{{informative.id}}")
 							md-icon(md-svg-icon="pencil")
-						md-button.md-icon-button(ng-click="delete($event, informative, $index)")
+						md-button.md-icon-button(ng-click="$ctrl.delete($event, informative, $index)")
 							md-icon(md-svg-icon="delete")
 
 		div(ng-show="informatives.length == 0",align="center")

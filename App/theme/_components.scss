@@ -89,16 +89,12 @@ md-input-container {
 }
 
 md-dialog {
-  max-height: calc(100vh - 50px) !important;
 
   md-dialog-actions {
     border-top: 1px solid $border-color;
     padding: 10px 20px;
   }
 
-  .md-dialog-content {
-    padding: 8px;
-  }
 }
 
 .ng-submitted,

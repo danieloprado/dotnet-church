@@ -46,10 +46,9 @@
     };
 
     const remove = (id) => {
-      return $http.post(endpoints.remove, {
-        id
-      });
+      return $http.delete(`${API}/informative/${id}`);
     };
+
 
     return {
       list,

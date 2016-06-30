@@ -4,7 +4,7 @@
   "dependencies": {
     "angular": "^1.5.7",
     "angular-route": "^1.5.7",
-    "angular-material": "^1.1.0-rc5",
+    "angular-material": "^1.1.0-rc4",
     "angular-aria": "^1.5.7",
     "angular-animate": "^1.5.7",
     "angular-jwt": "^0.0.9",
@@ -18,10 +18,12 @@
     "angular-google-maps": "^2.3.3",
     "lodash": "^4.13.1",
     "angular-validator-async": "^0.0.1",
-    "angular-input-masks": "^2.4.0"
+    "angular-input-masks": "^2.4.0",
+    "mdPickers": "^0.7.5"
   },
   "resolutions": {
-    "angular": "1.5.7"
+    "angular": "^1.4.0",
+    "angular-material": "^1.1.0-rc4"
   },
   "private": true
 }

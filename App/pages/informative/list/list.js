@@ -1,47 +1,30 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   angular.module('icbInformative')
     .controller("icbInformative.listCtrl", [
       '$scope',
-      'Dialog',
-      'Toast',
+      'UI',
       'informativeService',
       ListCtrl
     ]);
 
-  function ListCtrl($scope, dialog, Toast, service) {
-    $scope.selected = [];
+  function ListCtrl($scope, UI, informativeService) {
+    this.selected = [];
+    this.query = { order: "-date" };
 
-    $scope.query = {
-      order: "-date"
-    };
-
-    $scope.dataPromise = service.list().then((data) => {
-      $scope.informatives = data;
+    this.dataPromise = informativeService.list().then((data) => {
+      this.informatives = data;
     });
 
-    $scope.create = ($event) => {
-      service.form($event).then((informative) => {
-        $scope.informatives.push(informative);
-      });
-    };
-
-    $scope.edit = ($event, informative) => {
-      service.form($event, informative).then((newInformative) => {
-        angular.extend(informative, newInformative);
-      });
-    };
-
-    $scope.delete = ($event, informative, index) => {
-      dialog.confirm(`Deseja apagar o informativo **${informative.title}**`, $event)
-        .then(() => {
-          $scope.informatives.splice(index, 1);
-          service.remove(informative.id).catch(() => {
-            Toast(`Não foi possível apagar o informativo **${informative.title}**`);
-            $scope.informatives.push(informative);
-          });
+    this.delete = ($event, informative, index) => {
+      UI.Confirm(`Deseja apagar o informativo **${informative.title}**`, $event).then(() => {
+        this.informatives.splice(index, 1);
+        informativeService.remove(informative.id).catch(() => {
+          UI.Toast(`Não foi possível apagar o informativo **${informative.title}**`);
+          this.informatives.push(informative);
         });
+      });
     };
   }
 

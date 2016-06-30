@@ -1,9 +1,14 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
   $ = require('gulp-load-plugins')(),
   templateCache = require('gulp-angular-templatecache'),
   rimraf = require('rimraf');
 
-var paths = {
+const notify = (message) => {
+  return gulp.src('')
+    .pipe($.notify({ message: message, onLast: true }));
+};
+
+const paths = {
   js: ['App/main.js', 'App/**/*.js'],
   theme: ['App/theme/app.scss'],
 
@@ -18,8 +23,9 @@ var paths = {
     'bower_components/animate.css/animate.min.css',
     'bower_components/angular-material/angular-material.min.css',
     'bower_components/angular-material-data-table/dist/md-data-table.min.css',
-    'bower_components/angular-material-icons/angular-material-icons.css',
-    'bower_components/material-design-icons/iconfont/material-icons.css'
+
+    //pickers
+    'bower_components/mdPickers/dist/mdPickers.min.css',
   ],
 
   jsLibs: [
@@ -37,9 +43,11 @@ var paths = {
     'bower_components/angular-material-data-table/dist/md-data-table.min.js',
     'bower_components/angular-messages/angular-messages.min.js',
     'bower_components/angular-jwt/dist/angular-jwt.min.js',
-    'bower_components/angular-material-icons/angular-material-icons.min.js',
     'bower_components/angular-sanitize/angular-sanitize.min.js',
-    'bower_components/ngMask/dist/ngMask.min.js',
+
+    //mask
+    'bower_components/angular-input-masks/angular-input-masks-dependencies.min.js',
+    'bower_components/angular-input-masks/angular-input-masks.min.js',
 
     //Maps
     'bower_components/angular-simple-logger/dist/angular-simple-logger.min.js',
@@ -49,13 +57,16 @@ var paths = {
     'bower_components/marked/marked.min.js',
     'bower_components/angular-marked/dist/angular-marked.min.js',
 
+    //pickers
+    'bower_components/moment/min/moment.min.js',
+    'bower_components/moment/locale/pt-br.js',
+    'bower_components/mdPickers/dist/mdPickers.min.js',
+
     //validator
     'bower_components/md-form-validator/dist/md-form-validator.min.js'
 
   ]
 };
-
-
 
 //LIBS
 gulp.task('css:libs', () => {
@@ -86,7 +97,7 @@ gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs']);
 gulp.task("theme", () => {
   return gulp.src(paths.theme)
     .pipe($.sourcemaps.init())
-    .pipe($.sass({ outputStyle: "compressed" }).on('error', $.sass.logError))
+    .pipe($.sass({ outputStyle: "compressed" }).on('error', $.notify.onError("Sass error")))
     .pipe($.autoprefixer({ browsers: ["last 2 versions", "ie >= 9"] }))
     .pipe($.sourcemaps.write("/"))
     .pipe(gulp.dest(paths.dist + 'css'));
@@ -95,15 +106,15 @@ gulp.task("theme", () => {
 //JADE
 gulp.task('views:index', () => {
   return gulp.src(paths.viewIndex)
-    .pipe($.jade({ pretty: false }))
-    //.pipe($.replace("@NOW", new Date() * 1))
+    .pipe($.pug({ pretty: false }))
+    .pipe($.replace("@NOW", new Date() * 1))
     .pipe(gulp.dest(paths.dist))
 });
 
 gulp.task('views', ['views:index'], () => {
   return gulp.src(paths.views)
-    .pipe($.jade({ pretty: false }))
-    //.pipe($.replace("@NOW", new Date() * 1))
+    .pipe($.pug({ pretty: false }))
+    .pipe($.replace("@NOW", new Date() * 1))
     .pipe(templateCache("templates.min.js", { module: "icbApp", root: "/views" }))
     .pipe(gulp.dest(paths.dist + "/js"));
 });
@@ -112,7 +123,9 @@ gulp.task('views', ['views:index'], () => {
 gulp.task('js:hint', () => {
   return gulp.src(paths.js)
     .pipe($.jshint())
-    .pipe($.jshint.reporter('default'));
+    .pipe($.jshint.reporter('default'))
+    .pipe($.jshint.reporter('fail'))
+    .on('error', $.notify.onError("JSHint error"));
 });
 
 gulp.task('js', ['js:hint'], () => {
@@ -122,16 +135,26 @@ gulp.task('js', ['js:hint'], () => {
     .pipe($.babel({ presets: ['es2015'] }))
     .pipe($.uglify())
     .pipe($.sourcemaps.write('/'))
-    .pipe(gulp.dest(paths.dist + 'js'));
+    .pipe(gulp.dest(paths.dist + 'js'))
+    .on('error', $.notify.onError("JS error"));
 });
 
 gulp.task('watch', () => {
-  gulp.watch('App/**/*.scss', ['theme']);
-  gulp.watch('App/**/*.pug', ['views']);
-  gulp.watch(paths.js, ['js']);
+  var startAndNotify = (tasks) => {
+    return () => gulp.start(tasks, () => notify(`${tasks.join(', ').toUpperCase()} Completed`));
+  };
+
+  gulp.watch('App/**/*.scss', startAndNotify(['theme']));
+  gulp.watch('App/**/*.pug', startAndNotify(['views']));
+  gulp.watch(paths.js, startAndNotify(['js']));
 });
 
-gulp.task('compile', ['libs', 'views', 'theme', 'js']);
-gulp.task('default', ['compile', 'watch']);
+gulp.task('compile', (cb) => {
+  $.runSequence('clean', ['libs', 'views', 'theme', 'js'], () => {
+    notify('Compile Completed');
+    cb();
+  });
+});
 
-gulp.task('clean', _ => $.rimraf(paths.dist));
+gulp.task('default', ['compile', 'watch']);
+gulp.task('clean', cb => rimraf(`${paths.dist}/**/*`, cb));

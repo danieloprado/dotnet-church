@@ -1,16 +1,15 @@
 (function (angular) {
   'use strict';
 
-  angular.module("icbApp").factory("AuthInterceptor", [
+  angular.module("icbApp").factory("authInterceptor", [
     "$q",
     "$injector",
     "$rootScope",
-    "Auth",
+    "authService",
     AuthInterceptor
   ]);
 
-  function AuthInterceptor($q, $injector, $rootScope, Auth) {
-
+  function AuthInterceptor($q, $injector, $rootScope, authService) {
     const resolveLogin = (response) => {
       const loginService = $injector.get("loginService");
       const Loader = $injector.get("Loader");
@@ -26,16 +25,16 @@
 
     return {
       request: function (config) {
-        if (Auth.hasToken()) {
-          config.headers.Authorization = 'Bearer ' + Auth.getToken();
+        if (authService.hasToken()) {
+          config.headers.Authorization = 'Bearer ' + authService.getToken();
         }
 
         return config;
       },
       response: function (response) {
         var token = response.headers('X-Token');
-        if (token && token !== Auth.getToken()) {
-          Auth.setToken(token);
+        if (token && token !== authService.getToken()) {
+          authService.setToken(token);
           $rootScope.$broadcast("user-token-changed");
         }
 
