@@ -8,6 +8,7 @@ namespace ChurchWeb.Data
     {
         public static void DependencyInjection(IServiceCollection services)
         {
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IInformativeRepository, InformativeRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
         }

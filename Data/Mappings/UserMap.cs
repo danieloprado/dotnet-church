@@ -1,5 +1,6 @@
 using ChurchWeb.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ChurchWeb.Data.Mappings
 {
@@ -30,7 +31,8 @@ namespace ChurchWeb.Data.Mappings
             entity.HasMany(e => e.Churches)
               .WithOne(e => e.User)
               .HasForeignKey(e => e.UserId)
-              .IsRequired();
+              .IsRequired()
+              .OnDelete(DeleteBehavior.Restrict);
 
               entity.HasIndex(e=> e.Email)
                 .IsUnique();

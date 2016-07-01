@@ -17,6 +17,7 @@
 
     //'icbChurch',
     //'icbEvent',
+    'icbAppointment',
     'icbInformative'
   ]).constant('API', '/api');
 

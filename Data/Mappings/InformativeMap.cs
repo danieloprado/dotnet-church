@@ -1,5 +1,6 @@
 using ChurchWeb.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ChurchWeb.Data.Mappings
 {
@@ -24,11 +25,13 @@ namespace ChurchWeb.Data.Mappings
             //FK
             entity.HasOne(e => e.Church)
                 .WithMany()
-                .HasForeignKey(e => e.ChurchId);
+                .HasForeignKey(e => e.ChurchId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.Creator)
                 .WithMany()
-                .HasForeignKey(e => e.CreatorId);
+                .HasForeignKey(e => e.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

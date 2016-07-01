@@ -29,7 +29,7 @@
     this.submit = () => {
       UI.Loader(informativeService.save(this.model)).then((informative) => {
         UI.Toast("Salvo");
-        $location.path('/informative');
+        $location.path('/informativos');
       });
     };
 

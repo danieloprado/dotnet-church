@@ -15,6 +15,8 @@ namespace ChurchWeb.Data
         {
         }
 
+        public DbSet<Appointment> Appointments { get; set; }
+
         public DbSet<Church> Churches { get; set; }
 
         public DbSet<User> Users { get; set; }
@@ -23,6 +25,7 @@ namespace ChurchWeb.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            AppointmentMap.Map(builder);
             ChurchMap.Map(builder);
             ChurchUserMap.Map(builder);
             InformativeMap.Map(builder);

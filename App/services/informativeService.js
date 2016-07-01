@@ -14,31 +14,16 @@
 
     const list = () => {
       return $http.get(`${API}/informative`).then((response) => {
-        return response.data.map((item) => {
-          if (item.date) {
-            item.date = new Date(item.date);
-          }
-
-          return item;
-        });
+        return response.data.map((item) => parseDates(item));
       });
     };
 
     const get = (id) => {
-      return $http.get(`${API}/informative/${id}`).then(res => {
-        res.data.date = new Date(res.data.date);
-        return res.data;
-      });
+      return $http.get(`${API}/informative/${id}`).then(res => parseDates(res.data));
     };
 
     const save = (model) => {
-      return $http.post(`${API}/informative`, model).then((response) => {
-        if (response.data.date) {
-          response.data.date = new Date(response.data.date);
-        }
-
-        return response.data;
-      });
+      return $http.post(`${API}/informative`, model).then((response) => parseDates(response.data));
     };
 
     const remove = (id) => {

@@ -14,6 +14,7 @@
       link: ($scope, elem, attrs) => {
         elem.css({ display: "block" });
 
+        let changedByEditor = false;
         const simplemde = new SimpleMDE({
           element: elem.find('textarea')[0],
           spellChecker: false,
@@ -21,10 +22,20 @@
           placeholder: attrs.placeholder
         });
 
-        simplemde.value($scope.ngModel);
+        $scope.$watch("ngModel", () => {
+          if (changedByEditor) {
+            changedByEditor = false;
+            return;
+          }
+
+          simplemde.value($scope.ngModel);
+        });
 
         simplemde.codemirror.on("change", () => {
-          $timeout(() => $scope.ngModel = simplemde.value());
+          $timeout(() => {
+            changedByEditor = true;
+            $scope.ngModel = simplemde.value();
+          });
         });
       }
     };

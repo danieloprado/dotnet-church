@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbEvent', [
+  angular.module('icbAppointment', [
     'ngRoute'
   ]);
 

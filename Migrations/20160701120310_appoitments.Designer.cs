@@ -8,9 +8,10 @@ using ChurchWeb.Data;
 namespace dotnet.Migrations
 {
     [DbContext(typeof(ChurchDbContext))]
-    partial class ChurchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160701120310_appoitments")]
+    partial class appoitments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");
@@ -166,11 +167,13 @@ namespace dotnet.Migrations
                 {
                     b.HasOne("ChurchWeb.Domain.Entities.Church")
                         .WithMany()
-                        .HasForeignKey("ChurchId");
+                        .HasForeignKey("ChurchId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ChurchWeb.Domain.Entities.User")
                         .WithMany()
-                        .HasForeignKey("CreatorId");
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

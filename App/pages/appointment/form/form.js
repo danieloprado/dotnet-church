@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbEvent').controller("icbEvent.formCtrl", [
+  angular.module('icbAppointment').controller("icbAppointment.formCtrl", [
     '$scope',
     '$filter',
     '$mdDialog',
@@ -9,7 +9,7 @@
     'Loader',
     'Toast',
     'event',
-    'eventService',
+    'appointmentService',
     FormCtrl
   ]);
 

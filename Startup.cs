@@ -31,9 +31,14 @@ namespace ChurchWeb
             loggerFactory.AddConsole(_configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                UpdateDatabase(app);
             }
 
             app.UseDefaultFiles();
@@ -86,6 +91,16 @@ namespace ChurchWeb
                 ChurchWeb.Api.Config.Mapper(config);
                 ChurchWeb.Services.Config.Mapper(config);
             });
+        }
+
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            var serviceFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            using (var serviceScope = serviceFactory.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<ChurchDbContext>();
+                context.Database.Migrate();
+            }
         }
     }
 }

@@ -1,19 +1,15 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
-  angular.module('icbEvent')
-    .controller("icbEvent.listCtrl", [
-      '$scope',
-      'Dialog',
-      'Toast',
-      'eventService',
-      ListCtrl
-    ]);
+  angular.module('icbAppointment').controller("icbAppointment.listCtrl", [
+    '$scope',
+    'UI',
+    'appointmentService',
+    ListCtrl
+  ]);
 
-  function ListCtrl($scope, dialog, Toast, service) {
-    $scope.query = {
-      order: "name"
-    };
+  function ListCtrl($scope, UI, service) {
+    $scope.query = { order: "name" };
 
     $scope.dataPromise = service.list().then((data) => {
       $scope.events = data;
@@ -32,7 +28,7 @@
     };
 
     $scope.delete = ($event, event, index) => {
-      dialog.confirm(`Deseja apagar o evento **${event.name}**`, $event)
+      UI.Confirm(`Deseja apagar o evento **${event.name}**`, $event)
         .then(() => {
           $scope.events.splice(index, 1);
           service.remove(event.id).catch(() => {

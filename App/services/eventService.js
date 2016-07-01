@@ -2,32 +2,17 @@
   'use strict';
 
   angular.module('icbApp')
-    .factory('eventService', [
+    .factory('appointmentService', [
       'API',
       '$http',
       '$mdDialog',
-      EventService
+      'parseDates',
+      AppointmentService
     ]);
 
-  function EventService(API, $http, $mdDialog) {
-    let endpoints = {
-      list: API + '/event/',
-      save: API + '/event/',
-      remove: API + '/event/remove'
-    };
-
+  function AppointmentService(API, $http, $mdDialog, parseDates) {
     const list = () => {
-      return $http.get(endpoints.list).then((response) => {
-        return response.data.map((item) => {
-
-          item.dates.forEach(date => {
-            date.beginDate = new Date(date.beginDate);
-            date.endDate = new Date(date.endDate);
-          });
-
-          return item;
-        });
-      });
+      return $http.get(`${API}/appointment`).then(response => response.data.map(item => parseDates(item)));
     };
 
     const form = ($event, event) =>
@@ -43,7 +28,7 @@
       });
 
     const save = (model) => {
-      return $http.post(endpoints.save, model).then((response) => {
+      return $http.post(`${API}/appointment`, model).then((response) => {
         const event = response.data;
 
         event.dates.forEach(date => {

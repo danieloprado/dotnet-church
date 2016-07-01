@@ -8,9 +8,10 @@ using ChurchWeb.Data;
 namespace dotnet.Migrations
 {
     [DbContext(typeof(ChurchDbContext))]
-    partial class ChurchDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160701120441_ondelete-behavior")]
+    partial class ondeletebehavior
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");

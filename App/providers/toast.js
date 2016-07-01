@@ -20,15 +20,15 @@
 
     obj.genericError = (err) => {
       if (err) console.log(err);
-      return show("Aconteceu um erro inesperado...");
+      return obj("Aconteceu um erro inesperado...");
     };
 
     obj.userChanged = () => {
-      return show("O usuário foi alterado, seu trabalho não foi salvo.");
+      return obj("O usuário foi alterado, seu trabalho não foi salvo.");
     };
 
     obj.notFound = () => {
-      return show("Não encontrado");
+      return obj("Não encontrado");
     };
 
     obj.httpHandler = (res) => {
