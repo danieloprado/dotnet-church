@@ -8,6 +8,7 @@ namespace ChurchWeb.Api
     {
         public static void Mapper(IMapperConfiguration config)
         {
+            config.CreateMap<AppointmentViewModel, Appointment>();
             config.CreateMap<InformativeViewModel, Informative>();
         }
     }

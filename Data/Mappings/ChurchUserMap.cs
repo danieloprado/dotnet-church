@@ -10,6 +10,7 @@ namespace ChurchWeb.Data.Mappings
         {
             var entity = builder.Entity<ChurchUser>();
 
+            entity.ToTable("ChurchUser");
             entity.HasKey(e => new { e.UserId, e.ChurchId, e.Role });
 
             entity.HasOne(e => e.Church)

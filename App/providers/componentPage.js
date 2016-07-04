@@ -6,6 +6,8 @@
   function ComponentPage($rootScope, $q, ComponentTemplate) {
 
     return (component, resolve) => {
+            console.log(resolve);
+
       const defer = $q.defer();
       const $scope = $rootScope.$new();
       const template = ComponentTemplate(component, resolve);

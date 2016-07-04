@@ -43,6 +43,7 @@
       responseError: function (response) {
         const deferred = $q.defer();
         const toast = $injector.get("Toast");
+        const componentPage = $injector.get("componentPage");
 
         switch (response.status) {
           case 400:
@@ -61,6 +62,7 @@
             deferred.reject(response);
             break;
           case 500:
+            componentPage("appErrorPage", { html: response.data });
             toast.genericError(response);
             deferred.reject(response);
             break;

@@ -18,5 +18,17 @@ namespace ChurchWeb.Domain.Entities
         public string Description { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime? EndDate { get; set; }
+
+        public static Appointment Create(UserToken user, string title, string description, DateTime beginDate, DateTime? endDate = null)
+        {
+            return new Appointment()
+            {
+                ChurchId = user.ChurchId,
+                Title = title,
+                Description = description,
+                BeginDate = beginDate,
+                EndDate = endDate
+            };
+        }
     }
 }

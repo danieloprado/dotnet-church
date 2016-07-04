@@ -10,6 +10,7 @@ namespace ChurchWeb.Data.Mappings
         {
             var entity = builder.Entity<User>();
 
+            entity.ToTable("User");
             entity.HasKey(e => e.Id);
 
             entity.Property(e => e.FirstName)
