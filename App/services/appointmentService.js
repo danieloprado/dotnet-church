@@ -15,15 +15,16 @@
       return $http.get(`${API}/appointment`).then(response => response.data.map(item => parseDates(item)));
     };
 
-    const form = ($event, event) =>
+    const form = ($event, appointment) =>
       $mdDialog.show({
-        templateUrl: 'views/event/form.html',
-        controller: 'icbEvent.formCtrl',
+        templateUrl: '/views/pages/appointment/form/form.html',
+        controller: 'icbAppointment.formCtrl',
+        controllerAs: "$ctrl",
         clickOutsideToClose: true,
         escapeToClose: true,
         targetEvent: $event,
         locals: {
-          event: angular.copy(event || {})
+          appointment: angular.copy(appointment || {})
         }
       });
 

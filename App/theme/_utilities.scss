@@ -17,3 +17,15 @@
 .m-input {
   margin-top: 30px !important;
 }
+
+.no-record {
+  opacity: .8;
+  font-style: italic;
+  font-size: 14px;
+  margin-bottom: 10px;
+
+  &:before,
+  &:after {
+    content: ' - ';
+  }
+}

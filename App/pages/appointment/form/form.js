@@ -2,24 +2,24 @@
   'use strict';
 
   angular.module('icbAppointment').controller("icbAppointment.formCtrl", [
-    '$scope',
     '$filter',
     '$mdDialog',
     'lodash',
-    'Loader',
-    'Toast',
-    'event',
+    'UI',
+    'appointment',
     'appointmentService',
     FormCtrl
   ]);
 
-  function FormCtrl($scope, $filter, $mdDialog, _, Loader, Toast, event, service) {
-    const model = $scope.model = event || {};
+  function FormCtrl($filter, $mdDialog, lodash, UI, appointment, service) {
+    console.log('here');
+
+    const model = this.model = appointment || {};
     model.dates = model.dates || [{}];
-    $scope.editing = !_.isEmpty($scope.model);
+    this.editing = !lodash.isEmpty(this.model);
 
     model.dates.forEach(item => {
-      if (_.isEmpty(item)) return;
+      if (lodash.isEmpty(item)) return;
 
       item.begin = $filter('date')(item.beginDate, 'HH:mm');
       item.end = $filter('date')(item.endDate, 'HH:mm');
@@ -29,16 +29,16 @@
       item.date = item.beginDate;
     });
 
-    $scope.addDate = () => {
+    this.addDate = () => {
       model.dates.push({});
     };
 
-    $scope.removeDate = (date) => {
+    this.removeDate = (date) => {
       if (model.dates.length == 1) return;
-      _.remove(model.dates, x => x == date);
+      lodash.remove(model.dates, x => x == date);
     };
 
-    $scope.submit = () => {
+    this.submit = () => {
       var data = angular.copy(model);
 
       data.dates = model.dates.map(dateInfo => {
@@ -58,12 +58,11 @@
         };
       });
 
-      Loader(service.save(data))
-        .then((event) => {
-          Toast("Salvo");
-          $mdDialog.hide(event);
-          $scope.model = {};
-        }).catch((res) => Toast.httpHandler(res));
+      UI.Loader(service.save(data)).then((event) => {
+        UI.Toast("Salvo");
+        $mdDialog.hide(event);
+        this.model = {};
+      }).catch((res) => Toast.httpHandler(res));
     };
 
   }

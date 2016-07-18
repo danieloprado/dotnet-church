@@ -1,31 +1,31 @@
 icb-title Agenda
 
-md-button.md-fab.md-fab-bottom-right(ng-click="create($event)")
-	ng-md-icon(icon="add",size=32)
+md-button.md-fab.md-fab-bottom-right(ng-click="$ctrl.create($event)")
+	md-icon(md-svg-icon="plus",size=32)
 
 md-card
 	md-table-container
 
-		table(md-table, md-progress="dataPromise",)
-			thead(md-head, md-order="query.order")
+		table(md-table, md-progress="$ctrl.dataPromise",)
+			thead(md-head, md-order="$ctrl.query.order")
 				tr(md-row)
 					th(md-column, md-order-by="name") Titulo
 					th(md-column) Datas
 					th(md-column,width="120")
 
 			tbody(md-body)
-				tr(md-row, ng-repeat="event in events | filter:query.filter | orderBy:query.order")
+				tr(md-row, ng-repeat="event in $ctrl.appointments | filter:$ctrl.query.filter | orderBy:$ctrl.query.order")
 					td(md-cell) {{event.name}}
 					td(md-cell)
 						div.p-b-sm(ng-repeat="date in event.dates")
-							strong {{date.beginDate | date:'EEEE'}} 
-							br 
+							strong {{date.beginDate | date:'EEEE'}}
+							br
 							| {{date.beginDate | date:'d MMMM y HH:mm'}} até {{date.endDate | date:'HH:mm'}}
-					td.text-right(md-cell)
-						md-button.md-icon-button(ng-click="edit($event, event)")
+					td.md-cell-buttons(md-cell)
+						md-button.md-icon-button(ng-click="$ctrl.edit($event, event)")
 							md-icon edit
-						md-button.md-icon-button(ng-click="delete($event, event, $index)")
+						md-button.md-icon-button(ng-click="$ctrl.delete($event, event, $index)")
 							md-icon delete
 
-		div(ng-show="events.length == 0",align="center")
+		div.no-record(ng-show="$ctrl.events.length == 0",align="center")
 			| Nenhum evento criado

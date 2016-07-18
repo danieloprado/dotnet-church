@@ -14,8 +14,9 @@
 
   function configMaps(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
-      //key: 'your api key',
-      libraries: 'places,geocoder'
+      key: 'AIzaSyB-wemve6T0HOeNB4ROetIEneUZJZIl3PU',
+      libraries: 'places,geocoder',
+      language: 'pt-BR'
     });
   }
 

@@ -101,7 +101,10 @@ gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs']);
 gulp.task("theme", () => {
   return gulp.src(paths.theme)
     .pipe($.sourcemaps.init())
-    .pipe($.sass({ outputStyle: "compressed" }).on('error', $.notify.onError("Sass error")))
+    .pipe($.sass({ outputStyle: "compressed" }).on('error', $.notify.onError({
+      message: "Error: <%= error.message %>",
+      title: "THEME Error"
+    })))
     .pipe($.autoprefixer({ browsers: ["last 2 versions", "ie >= 9"] }))
     .pipe($.sourcemaps.write("/"))
     .pipe(gulp.dest(paths.dist + 'css'));

@@ -8,8 +8,9 @@
 
   function userInfo($rootScope, authService) {
     $rootScope.user = authService.getUser() || {};
-    $rootScope.$on("user-changed", () => {
+    $rootScope.$on("user-token-changed", () => {
       $rootScope.user = authService.getUser() || {};
+      console.log($rootScope.user);
     });
   }
 

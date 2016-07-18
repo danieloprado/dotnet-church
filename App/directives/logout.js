@@ -4,14 +4,14 @@
   angular.module('icbApp')
     .directive('icbLogout', ['loginService', '$timeout', Logout]);
 
-  function Logout(LoginService, $timeout) {
+  function Logout(service, $timeout) {
 
     return {
       restrict: 'A',
       scope: false,
       link: (scope, elem) => {
         angular.element(elem).on("click", function() {
-          LoginService.logout();
+          service.logout().then(_ => service.openLogin());
         });
       }
     };

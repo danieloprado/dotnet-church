@@ -30,7 +30,7 @@
       return isValidToken($window.localStorage.getItem('token'));
     };
 
-    this.getUser = function () {
+    this.getUser = () => {
       if (!this.hasToken()) return null;
       return jwtHelper.decodeToken(this.getToken());
     };

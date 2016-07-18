@@ -18,11 +18,11 @@ md-card
 				tr(md-row, ng-repeat="informative in $ctrl.informatives | filter:query.filter | orderBy:query.order")
 					td(md-cell) {{informative.title}}
 					td(md-cell) {{informative.date | date}}
-					td.text-right(md-cell)
+					td.md-cell-buttons(md-cell)
 						md-button.md-icon-button(href="/informativos/{{informative.id}}/editar")
 							md-icon(md-svg-icon="pencil")
 						md-button.md-icon-button(ng-click="$ctrl.delete($event, informative, $index)")
 							md-icon(md-svg-icon="delete")
 
-		div(ng-show="informatives.length == 0",align="center")
+		div.no-record(ng-show="$ctrl.informatives.length == 0",align="center")
 			| Nenhum informativo criado

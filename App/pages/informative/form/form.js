@@ -15,7 +15,6 @@
 
     if ($routeParams.id) {
       UI.Loader(informativeService.get($routeParams.id)).then(informative => {
-        console.log(informative);
         this.model = informative;
         this.editing = true;
       });

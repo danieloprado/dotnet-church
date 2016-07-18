@@ -2,38 +2,40 @@
   'use strict';
 
   angular.module('icbAppointment').controller("icbAppointment.listCtrl", [
-    '$scope',
     'UI',
     'appointmentService',
     ListCtrl
   ]);
 
-  function ListCtrl($scope, UI, service) {
-    $scope.query = { order: "name" };
+  function ListCtrl(UI, service) {
+    this.query = { order: "name" };
 
-    $scope.dataPromise = service.list().then((data) => {
-      $scope.events = data;
+    this.dataPromise = service.list().then((data) => {
+      this.events = data;
     });
 
-    $scope.create = ($event) => {
+
+    this.create = ($event) => {
       service.form($event).then((event) => {
-        $scope.events.push(event);
+        this.events.push(event);
       });
     };
+    this.create();
 
-    $scope.edit = ($event, event) => {
+
+    this.edit = ($event, event) => {
       service.form($event, event).then((newevent) => {
         angular.extend(event, newevent);
       });
     };
 
-    $scope.delete = ($event, event, index) => {
+    this.delete = ($event, event, index) => {
       UI.Confirm(`Deseja apagar o evento **${event.name}**`, $event)
         .then(() => {
-          $scope.events.splice(index, 1);
+          this.events.splice(index, 1);
           service.remove(event.id).catch(() => {
             Toast(`Não foi possível apagar o evento **${event.name}**`);
-            $scope.events.push(event);
+            this.events.push(event);
           });
         });
     };

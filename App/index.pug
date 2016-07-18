@@ -22,17 +22,17 @@ html(lang='en', ng-app='icbApp')
         header
           div.logo
             img(src="/imgs/logo.png")
-            p {{user.church.name}}
+            p {{user.church}}
 
-          p {{user.name.firstName}}
+          p {{user.firstName}}
 
           md-menu(md-position-mode="target-right target")
             md-button.md-icon-button(ng-click='$mdOpenMenu($event)')
-              md-icon(md-svg-icon='more_vert')
+              md-icon(md-svg-icon='dots-vertical')
             md-menu-content
               md-menu-item
                 md-button(icb-logout='')
-                  md-icon(md-svg-icon='exit_to_app')
+                  md-icon(md-svg-icon='logout')
                   | Sair
 
         nav.menu

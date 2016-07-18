@@ -168,11 +168,54 @@ md-datepicker {
   }
 }
 
-table.md-table td.md-cell {
-  vertical-align: top;
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
+table.md-table {
+  td.md-cell {
+    vertical-align: top;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    line-height: 18px;
+
+    &.md-cell-buttons {
+      text-align: right;
+      padding-top: 5px !important;
+      padding-bottom: 5px !important;
+
+      .md-button {
+        margin: 0;
+      }
+    }
+  }
+
+  &.striped {
+    tr:hover td {
+      background: rgba($accent, .08) !important;
+    }
+
+    tbody tr:nth-child(odd) td {
+      background: rgba(black, .03);
+    }
+  }
+
+  tfoot > tr:first-child > td {
+    border-top: 2px solid lighten(black, 80%);
+  }
+
+  &:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2),
+  &:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
+    padding: 0 15px 0 0;
+  }
+
+  td.md-cell:last-child,
+  th.md-column:last-child {
+    padding: 0 15px 0 0;
+  }
+
+  &:not(.md-row-select) td.md-cell:first-child,
+  &:not(.md-row-select) th.md-column:first-child {
+    padding: 0 15px;
+  }
 }
+
 
 icb-loading > div {
   position: absolute;
