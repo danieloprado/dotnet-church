@@ -14,7 +14,7 @@
       },
       template: `
         <md-progress-circular
-            md-diameter="100"
+            md-diameter="60"
             md-mode="indeterminate">
         </md-progress-circular>
 
@@ -60,23 +60,28 @@
     $scope.placeholder = $scope.placeholder || "Pesquisar";
     $scope.ngModel = $scope.ngModel || {};
 
+    const defaultLocation = {
+      lat: -23.5015338,
+      lng: -47.45259440000001
+    };
+
     const initialValue = {
-      latitude: $scope.ngModel.lat || -23.9549052,
-      longitude: $scope.ngModel.lng || -46.3306706,
+      latitude: $scope.ngModel.lat || defaultLocation.lat,
+      longitude: $scope.ngModel.lng || defaultLocation.lng,
     };
 
 
     const setCenter = (lat, lng) => {
-      $scope.map.center.latitude = $scope.marker.coords.latitude = lat || -23.9549052;
-      $scope.map.center.longitude = $scope.marker.coords.longitude = lng || 46.3306706;
+      $scope.map.center.latitude = $scope.marker.coords.latitude = lat || defaultLocation.lat;
+      $scope.map.center.longitude = $scope.marker.coords.longitude = lng || defaultLocation.lng;
     };
 
     const updateValue = (value) => {
       $scope.ngModel = $scope.ngModel || {};
 
       value = value || {};
-      value.lat = value.lat || -23.9549052;
-      value.lng = value.lng || -46.3306706;
+      value.lat = value.lat || defaultLocation.lat;
+      value.lng = value.lng || defaultLocation.lng;
 
       if (_.isEqual(value, {
         lat: $scope.ngModel.lat,
