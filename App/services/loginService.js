@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbApp').factory('loginService', [
+  angular.module('app').factory('loginService', [
     'API',
     '$http',
     '$q',

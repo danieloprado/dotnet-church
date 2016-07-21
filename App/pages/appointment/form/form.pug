@@ -1,61 +1,59 @@
-md-dialog(flex="70", flex-lg="90", flex-md="95", flex-sm="95", flex-xs="95")
-	md-toolbar
-		.md-toolbar-tools
-			h2(ng-if="!editing") Novo Evento
-			h2(ng-if="editing") Editar Evento
+app-title
+  span(ng-if="!editing") Novo Evento
+  span(ng-if="editing") Editar Evento
 
-	form(md-form-validator, ng-submit="submit()", name="eventForm")
-		md-dialog-content
-			.md-dialog-content
+form(md-form-validator, ng-submit="$ctrl.submit()", name="eventForm")
+  md-card
+    md-card-content
 
-				div(layout="row",layout-sm="column",layout-xs="column")
-					div(flex)
-						md-input-container.md-block
-							label Nome
-							input(ng-model='model.name', name='name', required)
-							md-messages
-								md-message(required) Obrigatório
+      div(layout="row",layout-sm="column",layout-xs="column")
+        div(flex)
+          md-input-container.md-block
+            label Nome
+            input(ng-model='$ctrl.model.name', name='name', required)
+            md-messages
+              md-message(required) Obrigatório
 
-						md-input-container.md-block
-							label Descrição
-							textarea(ng-model='model.description', name='description')
+          md-input-container.md-block
+            label Descrição
+            textarea(ng-model='$ctrl.model.description', name='description')
 
-						ng-form(layout="row",layout-xs="column", ng-repeat="date in model.dates", name="eventDateForm")
-							div(flex)
-								md-datepicker(ng-model="date.date", name="date", md-placeholder="Data", required)
-								div(ng-messages="eventDateForm.date.$error", ng-show="eventForm.$submitted || eventDateForm.date.$touched", md-auto-hide='false')
-									div(ng-message='required') Obrigatório
+          ng-form(layout="row",layout-xs="column", ng-repeat="date in $ctrl.model.dates", name="eventDateForm")
+            div(flex)
+              md-datepicker(ng-model="date.date", name="date", md-placeholder="Data", required)
+              div(ng-messages="eventDateForm.date.$error", ng-show="eventForm.$submitted || eventDateForm.date.$touched", md-auto-hide='false')
+                div(ng-message='required') Obrigatório
 
-							div(flex)
-								md-input-container.md-block
-									label Inicio
-									input(ng-model='date.begin', name="begin",mask="29:59", hour, required)
-									div(ng-messages="eventDateForm.begin.$error", ng-show="eventForm.$submitted || eventDateForm.begin.$touched", md-auto-hide='false')
-										div(ng-message='required') Obrigatório						
-										div(ng-message='mask') Hora inválida						
-										div(ng-message='hour') Hora inválida						
+            div(flex)
+              md-input-container.md-block
+                label Inicio
+                input(ng-model='date.begin', name="begin",mask="29:59", hour, required)
+                div(ng-messages="eventDateForm.begin.$error", ng-show="eventForm.$submitted || eventDateForm.begin.$touched", md-auto-hide='false')
+                  div(ng-message='required') Obrigatório
+                  div(ng-message='mask') Hora inválida
+                  div(ng-message='hour') Hora inválida
 
-							div(flex)
-								md-input-container.md-block
-									label Termino
-									input(ng-model='date.end', name="end", mask="29:59", hour, required)
-									div(ng-messages="eventDateForm.end.$error", ng-show="eventForm.$submitted || eventDateForm.end.$touched", md-auto-hide='false')
-										div(ng-message='required') Obrigatório
-										div(ng-message='mask') Hora inválida
-										div(ng-message='hour') Hora inválida
+            div(flex)
+              md-input-container.md-block
+                label Termino
+                input(ng-model='date.end', name="end", mask="29:59", hour, required)
+                div(ng-messages="eventDateForm.end.$error", ng-show="eventForm.$submitted || eventDateForm.end.$touched", md-auto-hide='false')
+                  div(ng-message='required') Obrigatório
+                  div(ng-message='mask') Hora inválida
+                  div(ng-message='hour') Hora inválida
 
-							md-button.md-icon-button.md-warn.m-input(ng-click="removeDate(date)",ng-show="model.dates.length > 1")
-								ng-md-icon(icon="delete")
-								md-tooltip Remover
+            md-button.md-icon-button.md-warn.m-input(ng-click="$ctrl.removeDate(date)",ng-show="$ctrl.model.dates.length > 1")
+              md-icon(md-svg-icon="delete")
+              md-tooltip Remover
 
 
-						div(align="right")
-							md-button.md-raised.md-accent(ng-click="addDate()") Adicionar
+          div(align="right")
+            md-button.md-raised.md-accent(ng-click="$ctrl.addDate()") Adicionar
 
-					div(flex=5,hide-sm,hide-xs)
+        div(flex=5,hide-sm,hide-xs)
 
-					div(flex)
-						icb-place-maps(ng-model="model.location",placeholder="Local")
+        //div(flex)
+          app-place-maps(ng-model="$ctrl.model.location",placeholder="Local")
 
-		md-dialog-actions(layout="row")
-			md-button.md-raised.md-accent(type="submit") Salvar
+  md-dialog-actions(layout="row")
+    md-button.md-raised.md-accent(type="submit") Salvar

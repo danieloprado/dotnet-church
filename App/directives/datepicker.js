@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module("icbApp").directive("datepicker", DatePicker);
+  angular.module("app").directive("datepicker", DatePicker);
 
   function DatePicker($compile, $mdpDatePicker) {
 

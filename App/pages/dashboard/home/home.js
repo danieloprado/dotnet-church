@@ -1,8 +1,8 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbApp')
-    .controller("icbApp.homeCtrl", [
+  angular.module('app')
+    .controller("app.homeCtrl", [
       '$scope',
       HomeCtrl
     ]);

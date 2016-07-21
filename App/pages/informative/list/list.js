@@ -1,8 +1,8 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbInformative')
-    .controller("icbInformative.listCtrl", [
+  angular.module('appInformative')
+    .controller("appInformative.listCtrl", [
       '$scope',
       'UI',
       'informativeService',

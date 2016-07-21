@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('icbApp').component("appLoginComponent", {
+  angular.module('app').component("appLoginComponent", {
     templateUrl: "/views/components/login/login.html",
     controller: Login,
     bindings: {

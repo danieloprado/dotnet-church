@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp').component('appLoader', {
+  angular.module('app').component('appLoader', {
     template: `
       <div ng-if="!$ctrl.hide">
         <md-progress-circular

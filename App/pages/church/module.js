@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbChurch', [
+  angular.module('appChurch', [
     'ngRoute'
   ]);
 

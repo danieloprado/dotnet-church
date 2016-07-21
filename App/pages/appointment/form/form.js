@@ -1,20 +1,19 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbAppointment').controller("icbAppointment.formCtrl", [
+  angular.module('appointment').controller("appointment.formCtrl", [
     '$filter',
     '$mdDialog',
     'lodash',
     'UI',
-    'appointment',
     'appointmentService',
     FormCtrl
   ]);
 
-  function FormCtrl($filter, $mdDialog, lodash, UI, appointment, service) {
+  function FormCtrl($filter, $mdDialog, lodash, UI, service) {
     console.log('here');
 
-    const model = this.model = appointment || {};
+    const model = this.model = {};
     model.dates = model.dates || [{}];
     this.editing = !lodash.isEmpty(this.model);
 

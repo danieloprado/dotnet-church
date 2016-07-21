@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('icbApp').factory('Loader', Loader);
+  angular.module('app').factory('Loader', Loader);
 
   function Loader($q, $rootScope) {
 

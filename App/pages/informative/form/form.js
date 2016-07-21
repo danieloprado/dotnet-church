@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbInformative').controller("icbInformative.formCtrl", [
+  angular.module('appInformative').controller("appInformative.formCtrl", [
     '$routeParams',
     '$location',
     'UI',

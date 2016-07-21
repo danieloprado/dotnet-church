@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .directive('toggleSidenav', ['$mdSidenav', Directive]);
 
   function Directive($mdSidenav) {

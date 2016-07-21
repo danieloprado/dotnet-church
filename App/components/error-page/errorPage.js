@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp').component('appErrorPage', {
+  angular.module('app').component('appErrorPage', {
     template: `
     <div class="error-page">
       <md-button class="md-fab md-fab-top-right" ng-click="$ctrl.complete()"><md-icon md-svg-icon="close" /></md-button>

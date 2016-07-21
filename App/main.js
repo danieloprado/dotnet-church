@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbApp', [
+  angular.module('app', [
     'ngSanitize',
     'ngMaterial',
     'ngMessages',
@@ -15,10 +15,10 @@
     'mdPickers',
     'validatorAsync',
 
-    //'icbChurch',
-    //'icbEvent',
-    'icbAppointment',
-    'icbInformative'
+    //'appChurch',
+    //'appEvent',
+    'appointment',
+    'appInformative'
   ]).constant('API', '/api');
 
 })(angular);

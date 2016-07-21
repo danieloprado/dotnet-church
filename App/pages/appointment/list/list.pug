@@ -1,6 +1,6 @@
-icb-title Agenda
+app-title Agenda
 
-md-button.md-fab.md-fab-bottom-right(ng-click="$ctrl.create($event)")
+md-button.md-fab.md-fab-bottom-right(href="/agenda/criar")
 	md-icon(md-svg-icon="plus",size=32)
 
 md-card
@@ -27,5 +27,5 @@ md-card
 						md-button.md-icon-button(ng-click="$ctrl.delete($event, event, $index)")
 							md-icon delete
 
-		div.no-record(ng-show="$ctrl.events.length == 0",align="center")
+		div.no-record(ng-show="$ctrl.events.length == 0", align="center")
 			| Nenhum evento criado

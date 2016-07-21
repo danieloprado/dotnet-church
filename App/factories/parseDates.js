@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module("icbApp").factory("parseDates", [ParseDates]);
+  angular.module("app").factory("parseDates", [ParseDates]);
 
   function ParseDates(){
 

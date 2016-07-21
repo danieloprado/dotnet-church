@@ -100,6 +100,7 @@ namespace ChurchWeb
             {
                 var context = serviceScope.ServiceProvider.GetService<ChurchDbContext>();
                 context.Database.Migrate();
+                context.Seed();
             }
         }
     }

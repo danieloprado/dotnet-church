@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .service('authService', ['$window', 'jwtHelper', AuthService]);
 
   function AuthService($window, jwtHelper) {

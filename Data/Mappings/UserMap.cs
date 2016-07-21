@@ -13,6 +13,8 @@ namespace ChurchWeb.Data.Mappings
             entity.ToTable("User");
             entity.HasKey(e => e.Id);
 
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
             entity.Property(e => e.FirstName)
               .IsRequired()
               .HasColumnType("varchar(50)");
@@ -35,8 +37,8 @@ namespace ChurchWeb.Data.Mappings
               .IsRequired()
               .OnDelete(DeleteBehavior.Restrict);
 
-              entity.HasIndex(e=> e.Email)
-                .IsUnique();
+            entity.HasIndex(e => e.Email)
+              .IsUnique();
         }
     }
 }

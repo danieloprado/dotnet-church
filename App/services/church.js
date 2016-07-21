@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbApp').service('AuthChurchService', [
+  angular.module('app').service('AuthChurchService', [
     'API',
     '$http',
     '$mdDialog',
@@ -23,7 +23,7 @@
     this.openSelection = () =>
       $mdDialog.show({
         templateUrl: 'views/auth/selectChurch.html',
-        controller: 'icbAuth.churchCtrl',
+        controller: 'appAuth.churchCtrl',
         clickOutsideToClose: false,
         escapeToClose: false,
       });
