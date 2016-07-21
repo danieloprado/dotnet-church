@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbInformative', [
+  angular.module('appInformative', [
     'ngRoute'
   ]);
 

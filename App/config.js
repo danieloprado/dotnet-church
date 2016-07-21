@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .config(['$httpProvider', configAuth])
     .config(['uiGmapGoogleMapApiProvider', configMaps])
     .config(['$mdIconProvider', configIcons])

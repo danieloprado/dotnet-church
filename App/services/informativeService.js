@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .factory('informativeService', [
       'API',
       '$http',

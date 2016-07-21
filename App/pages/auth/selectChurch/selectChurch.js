@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbInformative').controller("icbAuth.churchCtrl", [
+  angular.module('appInformative').controller("appAuth.churchCtrl", [
     '$scope',
     '$mdDialog',
     'Loader',

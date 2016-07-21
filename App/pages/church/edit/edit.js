@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbChurch')
+  angular.module('appChurch')
     .controller("church.editCtrl", [
       '$scope',
       'uiGmapGoogleMapApi',

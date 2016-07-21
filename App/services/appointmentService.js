@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .factory('appointmentService', [
       'API',
       '$http',
@@ -18,7 +18,7 @@
     const form = ($event, appointment) =>
       $mdDialog.show({
         templateUrl: '/views/pages/appointment/form/form.html',
-        controller: 'icbAppointment.formCtrl',
+        controller: 'appointment.formCtrl',
         controllerAs: "$ctrl",
         clickOutsideToClose: true,
         escapeToClose: true,

@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module("icbApp").factory("authInterceptor", [
+  angular.module("app").factory("authInterceptor", [
     "$q",
     "$injector",
     "$rootScope",

@@ -1,5 +1,5 @@
 doctype
-html(lang='en', ng-app='icbApp')
+html(lang='en', ng-app='app')
   head
     meta(name='viewport', content='initial-scale=1')
     meta(charset='UTF-8')
@@ -31,7 +31,7 @@ html(lang='en', ng-app='icbApp')
               md-icon(md-svg-icon='dots-vertical')
             md-menu-content
               md-menu-item
-                md-button(icb-logout='')
+                md-button(app-logout='')
                   md-icon(md-svg-icon='logout')
                   | Sair
 
@@ -56,7 +56,7 @@ html(lang='en', ng-app='icbApp')
               md-button.md-icon-button(hide-gt-sm='', toggle-sidenav)
                 md-icon(md-svg-icon="menu", size=24)
 
-              h1(icb-output-page-title)
+              h1(app-output-page-title)
 
           md-toolbar(ng-show="headerTabs.tabs.length > 0")
             md-tabs(md-selected="headerTabs.current")

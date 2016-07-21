@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('icbApp').component('appComponentPage', {
+  angular.module('app').component('appComponentPage', {
     template: `<div class="content-page-component animated fadeInUp" ng-show="!$ctrl.hide" id="app-component-page"/>`,
     controller: Controller
   });

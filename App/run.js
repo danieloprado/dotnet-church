@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .run(['$rootScope', 'authService', userInfo])
     .run(['$rootScope', 'authService', 'loginService', RunLoginCheck]);
 
@@ -10,7 +10,6 @@
     $rootScope.user = authService.getUser() || {};
     $rootScope.$on("user-token-changed", () => {
       $rootScope.user = authService.getUser() || {};
-      console.log($rootScope.user);
     });
   }
 

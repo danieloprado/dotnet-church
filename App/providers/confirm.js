@@ -1,7 +1,7 @@
 (angular => {
   'use strict';
 
-  angular.module('icbApp').factory('Confirm', Confirm);
+  angular.module('app').factory('Confirm', Confirm);
 
   function Confirm($q, $mdDialog, $window) {
 

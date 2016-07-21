@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module("icbApp").directive("markdownEditor", DatePicker);
+  angular.module("app").directive("appMarkdownEditor", DatePicker);
 
   function DatePicker($timeout, SimpleMDE) {
 

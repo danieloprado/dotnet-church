@@ -1,7 +1,7 @@
 (function (angular) {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .config(['$routeProvider', '$locationProvider', configRoutes]);
 
   function configRoutes($routeProvider, $locationProvider) {
@@ -14,7 +14,7 @@
     $routeProvider
       .when('/', {
         templateUrl: '/views/pages/dashboard/home/home.html',
-        controller: 'icbApp.homeCtrl'
+        controller: 'app.homeCtrl'
       })
       .otherwise({
         redirectTo: "/"

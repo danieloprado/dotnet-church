@@ -1,8 +1,8 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbAuth')
-    .controller("icbAuth.loginCtrl", [
+  angular.module('appAuth')
+    .controller("appAuth.loginCtrl", [
       '$scope',
       '$mdDialog',
       '$location',

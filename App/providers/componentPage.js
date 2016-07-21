@@ -1,12 +1,11 @@
 (angular => {
   'use strict';
 
-  angular.module('icbApp').factory('componentPage', ComponentPage);
+  angular.module('app').factory('componentPage', ComponentPage);
 
   function ComponentPage($rootScope, $q, ComponentTemplate) {
 
     return (component, resolve) => {
-            console.log(resolve);
 
       const defer = $q.defer();
       const $scope = $rootScope.$new();

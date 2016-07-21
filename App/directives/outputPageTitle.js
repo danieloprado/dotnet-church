@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp').directive('icbOutputPageTitle', ['$compile', Directive]);
+  angular.module('app').directive('appOutputPageTitle', ['$compile', Directive]);
 
   function Directive($compile) {
 

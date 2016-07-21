@@ -1,7 +1,7 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbAuth', ['ngRoute'])
+  angular.module('appAuth', ['ngRoute'])
     .config(['$httpProvider', configInterceptor])
     .run(['$rootScope', '$location', 'authService', 'loginService', loginCheck]);
 

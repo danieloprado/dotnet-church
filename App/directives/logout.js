@@ -1,8 +1,8 @@
 (function(angular) {
   'use strict';
 
-  angular.module('icbApp')
-    .directive('icbLogout', ['loginService', '$timeout', Logout]);
+  angular.module('app')
+    .directive('appLogout', ['loginService', '$timeout', Logout]);
 
   function Logout(service, $timeout) {
 

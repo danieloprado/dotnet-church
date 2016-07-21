@@ -1,8 +1,8 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp')
-    .directive('icbPlaceMaps', [IcbPlaceMaps]);
+  angular.module('app')
+    .directive('appPlaceMaps', [IcbPlaceMaps]);
 
   function IcbPlaceMaps() {
 
@@ -147,11 +147,11 @@
       }
     };
 
-    $templateCache.put('icbPlaceMapsSearchBox',
+    $templateCache.put('appPlaceMapsSearchBox',
       `<input type="text" class="ng-scope" placeholder="${$scope.placeholder}">`);
 
     $scope.searchbox = {
-      template: 'icbPlaceMapsSearchBox',
+      template: 'appPlaceMapsSearchBox',
       events: {
         places_changed: (searchBox) => {
           const places = searchBox.getPlaces();

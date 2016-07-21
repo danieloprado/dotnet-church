@@ -217,7 +217,7 @@ table.md-table {
 }
 
 
-icb-loading > div {
+app-loading > div {
   position: absolute;
   z-index: 10000;
   width: 100%;
@@ -234,7 +234,7 @@ icb-loading > div {
   }
 }
 
-icb-place-maps {
+app-place-maps {
   display: block;
   width: 100%;
   min-height: 300px;

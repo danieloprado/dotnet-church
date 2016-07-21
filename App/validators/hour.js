@@ -1,7 +1,7 @@
 ((angular) => {
   'use strict';
 
-  angular.module('icbApp')
+  angular.module('app')
     .directive('hour', ['lodash', Hour]);
 
   function Hour(_) {

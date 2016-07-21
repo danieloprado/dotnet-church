@@ -54,7 +54,7 @@ namespace ChurchWeb.Domain.Entities
 
         public static UserToken CreateForApp(User user, List<ChurchUser> roles)
         {
-            return Create(user, roles, DateTime.UtcNow.AddMinutes(15));
+            return Create(user, roles, DateTime.UtcNow.AddHours(15));
         }
     }
 }

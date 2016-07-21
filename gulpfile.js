@@ -122,7 +122,7 @@ gulp.task('views', ['views:index'], () => {
   return gulp.src(paths.views)
     .pipe($.pug({ pretty: false }))
     .pipe($.replace("@NOW", new Date() * 1))
-    .pipe(templateCache("templates.min.js", { module: "icbApp", root: "/views" }))
+    .pipe(templateCache("templates.min.js", { module: "app", root: "/views" }))
     .pipe(gulp.dest(paths.dist + "/js"));
 });
 
