@@ -217,7 +217,7 @@ table.md-table {
 }
 
 
-icb-loading > div {
+app-loading > div {
   position: absolute;
   z-index: 10000;
   width: 100%;
@@ -234,7 +234,7 @@ icb-loading > div {
   }
 }
 
-icb-place-maps {
+app-place-maps {
   display: block;
   width: 100%;
   min-height: 300px;
@@ -284,5 +284,22 @@ icb-place-maps {
 
   .gm-style-mtc {
     display: none;
+  }
+}
+
+md-tooltip.md-default-theme ._md-content,
+md-tooltip ._md-content {
+  background-color: rgba(0,0,0,.8);
+}
+
+md-toast {
+  @media (max-width: 959px) {
+    bottom: auto;
+    padding: 5px;
+  }
+
+  @include media-min-breakpoints(sm) {
+    left: auto;
+    width: auto;
   }
 }
