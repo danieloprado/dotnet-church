@@ -31,6 +31,7 @@
       mdFormValidatorProvider.setMessage("min", "Deve ter ser no minimo {min}");
       mdFormValidatorProvider.setMessage("max", "Deve ter ser no máximo {max}");
       mdFormValidatorProvider.setMessage("md-maxlength", "Deve ter no máximo {md-maxlength} caracteres");
+      mdFormValidatorProvider.setMessage("minlength", "Deve ter no minimo {ng-minlength} caracteres");
   }
 
   function configTheme($mdThemingProvider, $translateProvider) {

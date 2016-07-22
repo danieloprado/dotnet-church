@@ -13,7 +13,8 @@ namespace ChurchWeb.Data.Mappings
             entity.ToTable("User");
             entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd();
 
             entity.Property(e => e.FirstName)
               .IsRequired()

@@ -18,6 +18,14 @@
   margin-top: 19px !important;
 }
 
+.text-danger-hover {
+  transition: .5s;
+
+  &:hover {
+    color: $danger !important;
+  }
+}
+
 .no-record {
   opacity: .8;
   font-style: italic;

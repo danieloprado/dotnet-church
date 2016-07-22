@@ -1,22 +1,47 @@
 ﻿using System;
-using ChurchWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using ChurchWeb.Data;
 
-namespace dotnet.Migrations
+namespace churchweb.Migrations
 {
     [DbContext(typeof(ChurchDbContext))]
-    [Migration("20160525125155_informative")]
-    partial class informative
+    [Migration("20160722120337_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");
+                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
-            modelBuilder.Entity("ChurchWeb.Models.Church", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("BeginDate");
+
+                    b.Property<int>("ChurchId");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(1000)");
+
+                    b.Property<DateTime?>("EndDate");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChurchId");
+
+                    b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.Church", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -43,7 +68,7 @@ namespace dotnet.Migrations
                     b.ToTable("Church");
                 });
 
-            modelBuilder.Entity("ChurchWeb.Models.ChurchUser", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.ChurchUser", b =>
                 {
                     b.Property<int>("UserId");
 
@@ -60,7 +85,7 @@ namespace dotnet.Migrations
                     b.ToTable("ChurchUser");
                 });
 
-            modelBuilder.Entity("ChurchWeb.Models.Informative", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.Informative", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -91,7 +116,7 @@ namespace dotnet.Migrations
                     b.ToTable("Informative");
                 });
 
-            modelBuilder.Entity("ChurchWeb.Models.User", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -120,30 +145,33 @@ namespace dotnet.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("ChurchWeb.Models.ChurchUser", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.Appointment", b =>
                 {
-                    b.HasOne("ChurchWeb.Models.Church")
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
                         .WithMany()
-                        .HasForeignKey("ChurchId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ChurchWeb.Models.User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChurchId");
                 });
 
-            modelBuilder.Entity("ChurchWeb.Models.Informative", b =>
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.ChurchUser", b =>
                 {
-                    b.HasOne("ChurchWeb.Models.Church")
-                        .WithMany()
-                        .HasForeignKey("ChurchId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
+                        .WithMany("Users")
+                        .HasForeignKey("ChurchId");
 
-                    b.HasOne("ChurchWeb.Models.User")
+                    b.HasOne("ChurchWeb.Domain.Entities.User", "User")
+                        .WithMany("Churches")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("ChurchWeb.Domain.Entities.Informative", b =>
+                {
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
                         .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ChurchId");
+
+                    b.HasOne("ChurchWeb.Domain.Entities.User", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
                 });
         }
     }

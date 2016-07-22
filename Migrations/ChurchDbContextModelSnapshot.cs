@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using ChurchWeb.Data;
 
-namespace dotnet.Migrations
+namespace churchweb.Migrations
 {
     [DbContext(typeof(ChurchDbContext))]
     partial class ChurchDbContextModelSnapshot : ModelSnapshot
@@ -13,7 +13,7 @@ namespace dotnet.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rc2-20896");
+                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
 
             modelBuilder.Entity("ChurchWeb.Domain.Entities.Appointment", b =>
                 {
@@ -146,29 +146,29 @@ namespace dotnet.Migrations
 
             modelBuilder.Entity("ChurchWeb.Domain.Entities.Appointment", b =>
                 {
-                    b.HasOne("ChurchWeb.Domain.Entities.Church")
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
                         .WithMany()
                         .HasForeignKey("ChurchId");
                 });
 
             modelBuilder.Entity("ChurchWeb.Domain.Entities.ChurchUser", b =>
                 {
-                    b.HasOne("ChurchWeb.Domain.Entities.Church")
-                        .WithMany()
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
+                        .WithMany("Users")
                         .HasForeignKey("ChurchId");
 
-                    b.HasOne("ChurchWeb.Domain.Entities.User")
-                        .WithMany()
+                    b.HasOne("ChurchWeb.Domain.Entities.User", "User")
+                        .WithMany("Churches")
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ChurchWeb.Domain.Entities.Informative", b =>
                 {
-                    b.HasOne("ChurchWeb.Domain.Entities.Church")
+                    b.HasOne("ChurchWeb.Domain.Entities.Church", "Church")
                         .WithMany()
                         .HasForeignKey("ChurchId");
 
-                    b.HasOne("ChurchWeb.Domain.Entities.User")
+                    b.HasOne("ChurchWeb.Domain.Entities.User", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId");
                 });

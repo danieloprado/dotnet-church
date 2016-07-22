@@ -13,6 +13,9 @@ namespace ChurchWeb.Data.Mappings
             entity.ToTable("Church");
             entity.HasKey(e => e.Id);
 
+            entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd();
+
             entity.Property(e => e.Name)
               .IsRequired()
               .HasColumnType("varchar(100)");

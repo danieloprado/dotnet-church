@@ -6,21 +6,31 @@
   function DatePicker($compile, $mdpDatePicker) {
 
     return {
-      restrict: "A",
+      restric: 'A',
       scope: {
         ngModel: "="
       },
-      link: ($scope, elem, attrs) => {
-        const icon = angular.element('<md-icon md-svg-icon="calendar" ng-click="showPicker($event)"></md-icon>');
-        elem.before($compile(icon)($scope));
+      priority: 1,
+      replace: false,
+      terminal: true,
+      compile: (tElement, tAttrs) => {
+        console.log(tAttrs);
+        tElement.removeAttr('datepicker');
+        tElement.before('<md-icon md-svg-icon="calendar" ng-click="showPicker($event)"></md-icon>');
+        tAttrs.$set('ui-date-mask', '');
 
-        $scope.showPicker = (targetEvent) => {
-          if (elem.attr('disabled')) return;
+        return {
+          pre: ($scope, iElement) => {
+            $scope.showPicker = (targetEvent) => {
+              if (iElement.attr('disabled')) return;
 
-          $mdpDatePicker($scope.ngModel, { targetEvent })
-            .then((selectedDate) => $scope.ngModel = selectedDate);
+              $mdpDatePicker($scope.ngModel, { targetEvent })
+                .then(selectedDate => $scope.ngModel = selectedDate);
+            };
+
+            $compile(iElement)($scope);
+          }
         };
-
       }
     };
 

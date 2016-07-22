@@ -2,7 +2,7 @@
 @import 'mixin';
 @import 'components';
 @import 'utilities';
-@import 'fonts';
+@import 'fonts/roboto/style';
 @import '../components/component-page/componentPage';
 @import '../components/loader/loader';
 @import '../components/login/login';
@@ -10,6 +10,10 @@
 
 .padding {
   padding: 8px;
+}
+
+[ng-click] {
+  cursor: pointer;
 }
 
 body {

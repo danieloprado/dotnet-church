@@ -18,6 +18,7 @@ const paths = {
   dist: 'wwwroot/',
   imgs: 'App/theme/imgs/**/*',
   svgs: 'App/theme/svgs/**/*',
+  fonts: 'App/theme/fonts/**/*.woff2',
 
   cssLibs: [
     'bower_components/animate.css/animate.min.css',
@@ -90,12 +91,18 @@ gulp.task('imgs', () => {
     .pipe(gulp.dest(paths.dist + 'imgs'));
 });
 
+gulp.task('fonts', function () {
+  return gulp.src(paths.fonts)
+    .pipe($.rename({ dirname: '' }))
+    .pipe(gulp.dest(paths.dist + '/css/fonts'))
+});
+
 gulp.task('svgs', () => {
   return gulp.src(paths.svgs)
     .pipe(gulp.dest(paths.dist + 'svgs'));
 });
 
-gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs']);
+gulp.task('libs', ['css:libs', 'js:libs', 'imgs', 'svgs', 'fonts']);
 
 //SASS
 gulp.task("theme", () => {
@@ -113,14 +120,20 @@ gulp.task("theme", () => {
 //JADE
 gulp.task('views:index', () => {
   return gulp.src(paths.viewIndex)
-    .pipe($.pug({ pretty: false }))
+    .pipe($.pug({ pretty: false }).on('error', $.notify.onError({
+      message: "Error: <%= error.message %>",
+      title: "VIEWS INDEX Error"
+    })))
     .pipe($.replace("@NOW", new Date() * 1))
-    .pipe(gulp.dest(paths.dist))
+    .pipe(gulp.dest(paths.dist));
 });
 
 gulp.task('views', ['views:index'], () => {
   return gulp.src(paths.views)
-    .pipe($.pug({ pretty: false }))
+    .pipe($.pug({ pretty: false }).on('error', $.notify.onError({
+      message: "Error: <%= error.message %>",
+      title: "VIEWS Error"
+    })))
     .pipe($.replace("@NOW", new Date() * 1))
     .pipe(templateCache("templates.min.js", { module: "app", root: "/views" }))
     .pipe(gulp.dest(paths.dist + "/js"));

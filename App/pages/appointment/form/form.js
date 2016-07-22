@@ -11,8 +11,6 @@
   ]);
 
   function FormCtrl($filter, $mdDialog, lodash, UI, service) {
-    console.log('here');
-
     const model = this.model = {};
     model.dates = model.dates || [{}];
     this.editing = !lodash.isEmpty(this.model);
