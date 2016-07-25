@@ -19,10 +19,14 @@ namespace ChurchWeb.Services
         public static void Mapper(IMapperConfiguration config)
         {
             config.CreateMap<Informative, Informative>()
-                .ForMember(m=> m.ChurchId, opt=> opt.Ignore())
-                .ForMember(m=> m.Church, opt=> opt.Ignore())
-                .ForMember(m=> m.CreatedDate, opt=> opt.Ignore())
-                .ForMember(m=> m.UpdatedDate, opt=> opt.Ignore());
+              .ForMember(m => m.ChurchId, opt => opt.Ignore())
+              .ForMember(m => m.Church, opt => opt.Ignore())
+              .ForMember(m => m.CreatedDate, opt => opt.Ignore())
+              .ForMember(m => m.UpdatedDate, opt => opt.Ignore());
+
+            config.CreateMap<Appointment, Appointment>()
+              .ForMember(m => m.ChurchId, opt => opt.Ignore())
+              .ForMember(m => m.Church, opt => opt.Ignore());
         }
     }
 }

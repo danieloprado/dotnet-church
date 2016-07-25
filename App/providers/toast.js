@@ -1,19 +1,31 @@
 (angular => {
   'use strict';
 
-  angular.module('app').factory('Toast', ['$mdToast', Toast]);
+  angular.module('app').factory('Toast', [
+    '$mdToast',
+    'marked',
+    Toast
+  ]);
 
-  function Toast($mdToast) {
+  function Toast($mdToast, marked) {
     let toast, promise;
 
     const obj = (message, undo) => {
-      if (toast) return;
+      toast = $mdToast.simple()
+        .htmlContent(marked(message))
+        .hideDelay(10000)
+        .position("top right");
 
-      toast = $mdToast.simple().textContent(message).position("top right");
-      if (undo) toast.action("Desfazer");
+      if (undo) {
+        toast.action("Desfazer");
+      } else {
+        toast.action("OK");
+      }
 
-      promise = $mdToast.show(toast).then(res => res == "ok" ? "undo" : res);
-      promise.finally(() => toast = null);
+      promise = $mdToast.show(toast).then(res => res == "ok" && undo ? "undo" : res);
+      promise.finally(() => {
+        toast = null;
+      });
 
       return promise;
     };
@@ -33,12 +45,16 @@
 
     obj.httpHandler = (res) => {
       switch (res.status) {
+        case 400:
+          return obj("Dados inválidos");
         case 401:
-          return userChanged();
+          return obj.userChanged();
+        case 403:
+          return obj("Você não tem permissão de acesso");
         case 404:
-          return notFound();
+          return obj.notFound();
         default:
-          return genericError();
+          return obj.genericError();
       }
     };
 

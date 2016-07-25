@@ -14,7 +14,6 @@
       replace: false,
       terminal: true,
       compile: (tElement, tAttrs) => {
-        console.log(tAttrs);
         tElement.removeAttr('datepicker');
         tElement.before('<md-icon md-svg-icon="calendar" ng-click="showPicker($event)"></md-icon>');
         tAttrs.$set('ui-date-mask', '');

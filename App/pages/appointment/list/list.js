@@ -11,18 +11,21 @@
     this.query = { order: "name" };
 
     this.dataPromise = service.list().then(data => {
-      this.events = data;
+      this.appointments = data;
     });
 
-    this.delete = ($event, event, index) => {
-      UI.Confirm(`Deseja apagar o evento **${event.name}**`, $event)
-        .then(() => {
-          this.events.splice(index, 1);
-          service.remove(event.id).catch(() => {
-            Toast(`Não foi possível apagar o evento **${event.name}**`);
-            this.events.push(event);
-          });
-        });
+    this.delete = ($event, appointment) => {
+      UI.Confirm(`Deseja apagar o evento **${appointment.title}**`, $event).then(_ => {
+        const index = this.appointments.indexOf(appointment);
+        this.appointments.splice(index, 1);
+
+        return service.remove(appointment.id);
+      }).catch(error => {
+        if (error.isConfirm) return;
+
+        this.appointments.push(appointment);
+        UI.Toast(`Não foi possível apagar o evento **${appointment.title}**`);
+      });
     };
   }
 

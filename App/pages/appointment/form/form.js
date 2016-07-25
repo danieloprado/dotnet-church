@@ -3,63 +3,46 @@
 
   angular.module('appointment').controller("appointment.formCtrl", [
     '$filter',
-    '$mdDialog',
-    'lodash',
+    '$location',
+    '$routeParams',
+    'moment',
     'UI',
     'appointmentService',
     FormCtrl
   ]);
 
-  function FormCtrl($filter, $mdDialog, lodash, UI, service) {
+  function FormCtrl($filter, $location, $routeParams, moment, UI, service) {
     const model = this.model = {};
-    model.dates = model.dates || [{}];
-    this.editing = !lodash.isEmpty(this.model);
+    this.editing = $routeParams.id;
 
-    model.dates.forEach(item => {
-      if (lodash.isEmpty(item)) return;
+    if ($routeParams.id) {
+      service.find($routeParams.id).then(data => {
+        angular.extend(model, data);
 
-      item.begin = $filter('date')(item.beginDate, 'HH:mm');
-      item.end = $filter('date')(item.endDate, 'HH:mm');
+        model.beginTime = moment(data.beginDate).format('HH:mm');
+        model.endTime = moment(data.endDate).format('HH:mm');
+      });
+    }
 
-      item.beginDate.setHours(0);
-      item.beginDate.setMinutes(0);
-      item.date = item.beginDate;
-    });
+    const toDate = (date, hour) => {
+      const parts = hour.split(":");
 
-    this.addDate = () => {
-      model.dates.push({});
-    };
+      date.setHours(parts[0]);
+      date.setMinutes(parts[1]);
 
-    this.removeDate = (date) => {
-      if (model.dates.length == 1) return;
-      lodash.remove(model.dates, x => x == date);
+      return date;
     };
 
     this.submit = () => {
       var data = angular.copy(model);
 
-      data.dates = model.dates.map(dateInfo => {
-        const toDate = (hour) => {
-          let date = angular.copy(dateInfo.date);
-          const parts = hour.split(":");
-
-          date.setHours(parts[0]);
-          date.setMinutes(parts[1]);
-
-          return date;
-        };
-
-        return {
-          beginDate: toDate(dateInfo.begin),
-          endDate: toDate(dateInfo.end)
-        };
-      });
+      data.beginDate = toDate(data.beginDate, data.beginTime);
+      data.endDate = toDate(data.endDate, data.endTime);
 
       UI.Loader(service.save(data)).then((event) => {
         UI.Toast("Salvo");
-        $mdDialog.hide(event);
-        this.model = {};
-      }).catch((res) => Toast.httpHandler(res));
+        $location.path('/agenda');
+      }).catch(UI.Toast.httpHandler);
     };
 
   }

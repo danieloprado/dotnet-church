@@ -1,4 +1,4 @@
-(function(angular) {
+(function (angular) {
   'use strict';
 
   angular.module('appointment')
@@ -14,6 +14,10 @@
         controller: 'appointment.listCtrl',
         controllerAs: "$ctrl"
       }).when('/agenda/criar', {
+        templateUrl: '/views/pages/appointment/form/form.html',
+        controller: 'appointment.formCtrl',
+        controllerAs: "$ctrl"
+      }).when('/agenda/:id/editar', {
         templateUrl: '/views/pages/appointment/form/form.html',
         controller: 'appointment.formCtrl',
         controllerAs: "$ctrl"

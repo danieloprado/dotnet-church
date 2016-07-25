@@ -35,6 +35,7 @@ namespace ChurchWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDirectoryBrowser();
             }
             else
             {
@@ -43,8 +44,6 @@ namespace ChurchWeb
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            app.UseDirectoryBrowser();
 
             app.UseMvc(routes =>
             {

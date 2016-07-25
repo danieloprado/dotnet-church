@@ -9,43 +9,38 @@ form(md-form-validator, ng-submit="$ctrl.submit()", name="eventForm")
       div(layout="row",layout-sm="column",layout-xs="column")
         div(flex)
           md-input-container.md-block
-            label Nome
-            input(ng-model='$ctrl.model.name', name='name', required)
+            label Título
+            input(ng-model='$ctrl.model.title', name='title', required)
             md-messages
 
           md-input-container.md-block
             label Descrição
             textarea(ng-model='$ctrl.model.description', name='description')
 
-          div(ng-repeat="date in $ctrl.model.dates")
-            ng-form(layout="row",layout-xs="column", md-form-validator, name="eventDateForm")
-              div(flex)
-                md-input-container.md-block
-                  label Data
-                  input(ng-model='$ctrl.model.date', name='name', required, datepicker)
-                  md-messages
+      div(layout="row", layout-xs="column")
+        div(flex)
+          md-input-container.md-block
+            label Inicio
+            input(ng-model='$ctrl.model.beginDate', name='beginDate', required, datepicker)
+            md-messages
 
-              div(flex)
-                md-input-container.md-block
-                  label Inicio
-                  input(ng-model='date.begin', name="begin",mask="29:59", hour, required)
-                  md-messages
+        div(flex)
+          md-input-container.md-block
+            label Hora
+            input(ng-model='$ctrl.model.beginTime', name="beginTime", timepicker, required)
+            md-messages
 
-              div(flex)
-                md-input-container.md-block
-                  label Termino
-                  input(ng-model='date.end', name="end", mask="29:59", hour, required)
-                  md-messages
+        div(flex)
+          md-input-container.md-block
+            label Término
+            input(ng-model='$ctrl.model.endDate', name='endDate', required, datepicker)
+            md-messages
 
-            md-button.md-icon-button.text-danger-hover.m-input(ng-click="$ctrl.removeDate(date)",ng-show="$ctrl.model.dates.length > 1")
-              md-icon(md-svg-icon="delete")
-              md-tooltip Remover
-
-
-          div(align="right")
-            md-button.md-raised.md-primary(ng-click="$ctrl.addDate()") Adicionar
-
-        div(flex=5,hide-sm,hide-xs)
+        div(flex)
+          md-input-container.md-block
+            label Hora
+            input(ng-model='$ctrl.model.endTime', name="endTime", timepicker, required)
+            md-messages
 
         //div(flex)
           app-place-maps(ng-model="$ctrl.model.location",placeholder="Local")

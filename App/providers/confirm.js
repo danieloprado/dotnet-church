@@ -3,12 +3,12 @@
 
   angular.module('app').factory('Confirm', Confirm);
 
-  function Confirm($q, $mdDialog, $window) {
+  function Confirm($q, $mdDialog, marked) {
 
     return (message, $event) => {
       const confirm = $mdDialog.confirm()
         .title("Confirmar")
-        .htmlContent(`${$window.marked(message)}`)
+        .htmlContent(marked(message))
         .targetEvent($event)
         .ok('Sim')
         .cancel('Não');
@@ -17,7 +17,7 @@
     };
 
   }
-  Confirm.$inject = ['$q', '$mdDialog', '$window'];
+  Confirm.$inject = ['$q', '$mdDialog', 'marked'];
 
 
 })(angular);

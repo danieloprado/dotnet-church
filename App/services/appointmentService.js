@@ -15,44 +15,19 @@
       return $http.get(`${API}/appointment`).then(response => response.data.map(item => parseDates(item)));
     };
 
-    const form = ($event, appointment) =>
-      $mdDialog.show({
-        templateUrl: '/views/pages/appointment/form/form.html',
-        controller: 'appointment.formCtrl',
-        controllerAs: "$ctrl",
-        clickOutsideToClose: true,
-        escapeToClose: true,
-        targetEvent: $event,
-        locals: {
-          appointment: angular.copy(appointment || {})
-        }
-      });
+    const find = (id) => {
+      return $http.get(`${API}/appointment/${id}`).then(response => parseDates(response.data));
+    };
 
     const save = (model) => {
-      return $http.post(`${API}/appointment`, model).then((response) => {
-        const event = response.data;
-
-        event.dates.forEach(date => {
-          date.beginDate = new Date(date.beginDate);
-          date.endDate = new Date(date.endDate);
-        });
-
-        return event;
-      });
+      return $http.post(`${API}/appointment`, model).then(response => parseDates(response.data));
     };
 
     const remove = (id) => {
-      return $http.post(endpoints.remove, {
-        id
-      });
+      return $http.post(endpoints.remove, { id });
     };
 
-    return {
-      list: list,
-      form: form,
-      save: save,
-      remove: remove
-    };
+    return { list, find, save, remove };
   }
 
 })(angular);

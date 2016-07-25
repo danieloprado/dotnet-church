@@ -1,31 +1,35 @@
 app-title Agenda
 
 md-button.md-fab.md-fab-bottom-right(href="/agenda/criar")
-	md-icon(md-svg-icon="plus",size=32)
+  md-icon(md-svg-icon="plus",size=32)
 
 md-card
-	md-table-container
+  md-table-container
 
-		table(md-table, md-progress="$ctrl.dataPromise",)
-			thead(md-head, md-order="$ctrl.query.order")
-				tr(md-row)
-					th(md-column, md-order-by="name") Titulo
-					th(md-column) Datas
-					th(md-column,width="120")
+    table(md-table, md-progress="$ctrl.dataPromise",)
+      thead(md-head, md-order="$ctrl.query.order")
+        tr(md-row)
+          th(md-column, md-order-by="title") Titulo
+          th(md-column, md-order-by="beginDate") Inicio
+          th(md-column, md-order-by="endDate") Término
+          th(md-column, width="120")
 
-			tbody(md-body)
-				tr(md-row, ng-repeat="event in $ctrl.appointments | filter:$ctrl.query.filter | orderBy:$ctrl.query.order")
-					td(md-cell) {{event.name}}
-					td(md-cell)
-						div.p-b-sm(ng-repeat="date in event.dates")
-							strong {{date.beginDate | date:'EEEE'}}
-							br
-							| {{date.beginDate | date:'d MMMM y HH:mm'}} até {{date.endDate | date:'HH:mm'}}
-					td.md-cell-buttons(md-cell)
-						md-button.md-icon-button(ng-click="$ctrl.edit($event, event)")
-							md-icon edit
-						md-button.md-icon-button(ng-click="$ctrl.delete($event, event, $index)")
-							md-icon delete
+      tbody(md-body)
+        tr(md-row, ng-repeat="appointment in $ctrl.appointments | filter:$ctrl.query.filter | orderBy:$ctrl.query.order")
+          td(md-cell) {{appointment.title}}
+          td(md-cell)
+            strong {{appointment.beginDate | date:'EEEE'}}
+            br
+            | {{appointment.beginDate | date:'d MMMM y HH:mm'}}
+          td(md-cell)
+            strong {{appointment.endDate | date:'EEEE'}}
+            br
+            | {{appointment.endDate | date:'d MMMM y HH:mm'}}
+          td.md-cell-buttons(md-cell)
+            md-button.md-icon-button(ng-href="/agenda/{{appointment.id}}/editar")
+              md-icon(md-svg-icon="pencil")
+            md-button.md-icon-button(ng-click="$ctrl.delete($event, appointment)")
+              md-icon(md-svg-icon="delete")
 
-		div.no-record(ng-show="$ctrl.events.length == 0", align="center")
-			| Nenhum evento criado
+    div.no-record(ng-show="$ctrl.appointments.length == 0", align="center")
+      | Nenhum appointmento criado
